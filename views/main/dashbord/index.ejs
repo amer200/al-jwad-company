@@ -4,14 +4,16 @@
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
                 <li class="sidebar-brand"> <a href=""> Amer </a> </li>
-                <li> <a href="#">العملاء</a> </li>
-                <li> <a href="#">الشحنات</a> </li>
+                <li> <a href="#" onclick="showBox('clint-box')">العملاء</a> </li>
+                <li> <a href="#" onclick="showBox('package-box')">الشحنات</a> </li>
             </ul>
         </div> <!-- /#sidebar-wrapper -->
         <!-- Page Content -->
         <div id="page-content-wrapper">
             <div class="container-fluid">
                 <%- include('./clints') -%>
+                    <%- include('./package') -%>
+
             </div>
         </div> <!-- /#page-content-wrapper -->
     </div> <!-- /#wrapper -->
@@ -19,6 +21,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
+        <script src="/dashbord/js/main.js"></script>
     </body>
 
     </html>
