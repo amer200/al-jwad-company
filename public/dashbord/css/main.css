@@ -1240,7 +1240,9 @@ body {
     border-top: none;
     border-right: none;
 }
-
+#sidebar-wrapper i {
+    color: #fff;
+}
 #wrapper.toggled #sidebar-wrapper {
     width: 250px;
 }
@@ -1274,9 +1276,10 @@ body {
 }
 
 .sidebar-nav li a {
-    display: block;
+    display: inline;
     text-decoration: none;
     color: #fff;
+    margin-right: 10px;
 }
 
 .sidebar-nav li a:hover {
