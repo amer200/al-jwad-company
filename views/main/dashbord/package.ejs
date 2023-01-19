@@ -1,7 +1,13 @@
 <link rel="stylesheet" href="/dashbord/css/package.css">
 <div class="row d-none" id="package-box">
     <div class="col-12">
-        <h3>جميع الشحنات</h3>
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <div class="btn-group">
+                <a href="#" class="btn btn-primary active" aria-current="page">جميع الشحنات</a>
+                <a href="#" class="btn btn-primary">نوع الشحنة</a>
+                <a href="#" class="btn btn-primary">نوع الشحنة</a>
+            </div>
+        </div>
     </div>
     <div class="col-12">
         <table class="table">
@@ -61,6 +67,63 @@
         </table>
     </div>
     <div class="add-btn">
-        <button class="btn btn-primary"><i class="fa-solid fa-plus"></i></button>
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-pack-mdal"><i
+                class="fa-solid fa-plus"></i></button>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="add-pack-mdal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">اضافة شحنة</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="package-data">
+                    <h3>معلومات الشحنة</h3>
+                    <form>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" id="" placeholder="lorem ipusm">
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" id="" placeholder="lorem ipusm">
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" id="" placeholder="lorem ipusm">
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" id="" placeholder="lorem ipusm">
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" id="" placeholder="lorem ipusm">
+                        </div>
+                    </form>
+                </div>
+                <div class="clint-data">
+                    <h3>معلومات العملاء</h3>
+                    <form>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" id="" placeholder="lorem ipusm">
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" id="" placeholder="lorem ipusm">
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" id="" placeholder="lorem ipusm">
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" id="" placeholder="lorem ipusm">
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" id="" placeholder="lorem ipusm">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary">حفظ</button>
+            </div>
+        </div>
     </div>
 </div>
