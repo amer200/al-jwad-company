@@ -17,12 +17,12 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
     store: store,
-    lang: 'ar'
 }))
 /********************************************************************************* */
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 /********************************************************************************* */
 const mainRoutes = require('./routes/main');
 app.use('/', mainRoutes);
