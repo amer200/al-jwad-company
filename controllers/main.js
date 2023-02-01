@@ -1,9 +1,6 @@
 const Strore = require('../models/store');
 const Client = require('../models/client');
-const telr = require("telr-nodejs")(process.env.TELR_AUTH, process.env.TELR_ID, {
-    isTest: 1,
-    currency: "sar"
-});
+const axios = require('axios');
 const bcrypt = require('bcryptjs');
 const salt = bcrypt.genSaltSync(10);
 exports.getDash = async (req, res) => {
@@ -173,14 +170,35 @@ exports.logOut = (req, res) => {
 exports.addFund = (req, res) => {
     const storeId = req.session.store._id;
     const amount = req.body.amount;
-    telr.order({
-        orderId: storeId,
-        amount: amount,
-        returnUrl: "http://your-return-url.com",
-        declineUrl: "http://url-to-call-in-decline-transaction.com",
-        cancelUrl: "http://url-to-call-in-cancel-transaction.com",
-        description: "test transiction"
-    }, function (err, response) {
-        console.log(response);
-    });
+    const data = {
+        ivp_store: process.env.TELR_ID,
+        ivp_authkey: process.env.TELR_AUTH,
+        ivp_trantype: 'sale',
+        ivp_tranclass: 'Mo/To',
+        ivp_desc: "test test",
+        ivp_currency: 'SAR',
+        ivp_amount: amount,
+        ivp_test: 1,
+        ivp_cn: "4000 0000 0000 0002", // card number
+        ivp_exm: 10, // expire month
+        ivp_exy: 2024, // expire year
+        bill_fname: "amer", // first name 
+        bill_sname: 'mostafa', // sur name
+        bill_addr1: "Address", //address
+        bill_city: "aswan",
+        bill_country: "AE",
+        bill_email: "amermostaafa@gmail.com"
+    };
+
+    axios.post('https://secure.telr.com/gateway/remote.html ', {
+        headers: {
+            'Authorization': "Basic 14dab62cMCr5fxW24Q5NpM$2"
+        }
+    }, data)
+        .then((res) => {
+            console.log(`Status: ${res.status}`);
+            console.log('Body: ', res.data);
+        }).catch((err) => {
+            console.error(err);
+        });
 }
