@@ -1,5 +1,9 @@
 const Strore = require('../models/store');
 const Client = require('../models/client');
+const telr = require("telr-nodejs")(process.env.TELR_AUTH, process.env.TELR_ID, {
+    isTest: 1,
+    currency: "sar"
+});
 const bcrypt = require('bcryptjs');
 const salt = bcrypt.genSaltSync(10);
 exports.getDash = async (req, res) => {
@@ -154,6 +158,7 @@ exports.postLogin = (req, res) => {
             console.log(err)
         })
 }
+
 exports.getLogin = (req, res) => {
     res.render('main/dashbord/login', {
         msg: false
@@ -163,4 +168,19 @@ exports.logOut = (req, res) => {
     req.session.destroy((err) => {
         res.redirect('/')
     })
+}
+/*****wallet **********************************************************/
+exports.addFund = (req, res) => {
+    const storeId = req.session.store._id;
+    const amount = req.body.amount;
+    telr.order({
+        orderId: storeId,
+        amount: amount,
+        returnUrl: "http://your-return-url.com",
+        declineUrl: "http://url-to-call-in-decline-transaction.com",
+        cancelUrl: "http://url-to-call-in-cancel-transaction.com",
+        description: "test transiction"
+    }, function (err, response) {
+        console.log(response);
+    });
 }

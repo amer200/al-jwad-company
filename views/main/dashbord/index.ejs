@@ -4,8 +4,11 @@
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
                 <li class="sidebar-brand"> <a href=""> logo </a> </li>
-                <li> <i class="fa-solid fa-sack-dollar"></i><a href="#" onclick="showBox('clint-box')">المحفظة(
-                        ر.س0)</a></li>
+                <li> <i class="fa-solid fa-sack-dollar"></i><button class="btn btn-success" data-bs-toggle="modal"
+                        data-bs-target="#wallet" style="background: none;
+                        border: none;">
+                        المحفظة(
+                        ر.س0)</button></li>
                 <li> <img src="/imgs/costumer.png" style="width: 25px;
                     height: 25px;
                     margin-right: 15px;"><a href="#" onclick="showBox('clint-box')">العملاء</a> </li>
@@ -19,6 +22,7 @@
             <div class="container-fluid">
                 <%- include('./clints') -%>
                     <%- include('./package') -%>
+                        <%- include('./wallet') -%>
 
             </div>
         </div> <!-- /#page-content-wrapper -->
