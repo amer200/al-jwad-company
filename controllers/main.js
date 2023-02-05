@@ -171,28 +171,30 @@ exports.addFund = (req, res) => {
     const storeId = req.session.store._id;
     const amount = req.body.amount;
     const data = {
-        ivp_store: process.env.TELR_ID,
-        ivp_authkey: process.env.TELR_AUTH,
-        ivp_trantype: 'sale',
-        ivp_tranclass: 'Mo/To',
-        ivp_desc: "test test",
-        ivp_currency: 'SAR',
-        ivp_amount: amount,
+        ivp_framed: 2,
+        ivp_method: 'create',
+        ivp_store: process.env.TELR_AUTH,
+        ivp_authkey: `${process.env.TELR_AUTH}`,
+        ivp_desc: ' Description good',
+        ivp_cart: '4000000000000002',
+        ivp_currency: 'AED',
+        ivp_amount: 1000,
         ivp_test: 1,
-        ivp_cn: "4000 0000 0000 0002", // card number
-        ivp_exm: 10, // expire month
-        ivp_exy: 2024, // expire year
-        bill_fname: "amer", // first name 
-        bill_sname: 'mostafa', // sur name
-        bill_addr1: "Address", //address
-        bill_city: "aswan",
-        bill_country: "AE",
-        bill_email: "amermostaafa@gmail.com"
+        return_auth: 'https://teljoy.io/telr/new/trans.php?status=Success',
+        return_decl: 'https://teljoy.io/telr/new/trans.php?status=Declined',
+        return_can: 'https://teljoy.io/telr/new/trans.php?status=Cancelled',
+        bill_title: 'Mr',
+        bill_fname: 'Mohammad',
+        bill_sname: 'Maids',
+        bill_email: 'memeaktaa@gmail.com',
+        bill_addr1: 'Dubai',
+        bill_city: 'Dubai',
+        bill_country: 'AE',
     };
 
-    axios.post('https://secure.telr.com/gateway/remote.html ', {
+    axios.post('https://secure.telr.com/gateway/order.json', {
         headers: {
-            'Authorization': "Basic 14dab62cMCr5fxW24Q5NpM$2"
+            'Authorization': `Basic ${process.env.TELR_AUTH}`
         }
     }, data)
         .then((res) => {
