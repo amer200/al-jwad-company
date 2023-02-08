@@ -10,6 +10,7 @@ routes.get('/remove-client/:id', storeAuth.isAuth, mainController.removeClient);
 routes.post('/get-search-client-result', storeAuth.isAuth, mainController.clientSearch);
 /***********************walledt *****************************/
 routes.post('/add-fund', storeAuth.isAuth, mainController.addFund);
+routes.get('/check-order', storeAuth.isAuth, mainController.checkOrder);
 /********************************************* */
 routes.get('/signup', mainController.getSignUP)
 routes.post('/signup', mainController.postSignUp);

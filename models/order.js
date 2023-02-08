@@ -6,7 +6,8 @@ const orderShemaa = mongoose.Schema({
     amount: Number,
     status: Boolean,
     ref: String,
-    url: String
+    url: String,
+    cheked: Boolean
 })
 
 module.exports = mongoose.model('Order', orderShemaa);

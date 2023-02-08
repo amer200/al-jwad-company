@@ -3,14 +3,16 @@ const Client = require('../models/client');
 const Order = require('../models/order');
 const bcrypt = require('bcryptjs');
 const salt = bcrypt.genSaltSync(10);
-var telr = require("telr-nodejs")('Vb8kW-zPQF9@pZX6', "28017", {
+const telr = require("telr-nodejs")(process.env.TELR_AUTH, process.env.TELR_ID, {
     isTest: 1,
     currency: "SAR"
 });
 exports.getDash = async (req, res) => {
     const clients = await Client.find({ store: req.session.store._id });
+    console.log(req.session.store);
     res.render('main/dashbord/index', {
-        clients: clients
+        clients: clients,
+        wallet: req.session.store.wallet
     })
 }
 
@@ -124,7 +126,8 @@ exports.postSignUp = (req, res) => {
         email: email,
         password: hash,
         address: address,
-        location: location
+        location: location,
+        wallet: 0
     })
     newStore.save()
         .then(resu => {
@@ -176,9 +179,9 @@ exports.addFund = (req, res) => {
     telr.order({
         orderId: new Date().valueOf(),
         amount: amount,
-        returnUrl: "http://localhost:3000/",
-        declineUrl: "http://url-to-call-in-decline-transaction.com",
-        cancelUrl: "http://url-to-call-in-cancel-transaction.com",
+        returnUrl: "http://al-jwad.onrender.com/check-order",
+        declineUrl: "http://al-jwad.onrender.com/check-order",
+        cancelUrl: "http://al-jwad.onrender.com/check-order",
         description: "add to wallet"
     }, function (err, createRes) {
         console.log(createRes);
@@ -187,14 +190,47 @@ exports.addFund = (req, res) => {
             amount: amount,
             status: 0,
             ref: createRes.order.ref,
-            url: createRes.order.url
+            url: createRes.order.url,
+            cheked: 0
         })
         order.save()
             .then(o => {
+                req.session.orderRef = o.ref;
                 res.redirect(o.url);
             })
             .catch(err => {
                 console.log(err)
             })
     });
+}
+exports.checkOrder = (req, res) => {
+    if (req.session.orderRef) {
+        Order.findOne({ ref: req.session.orderRef })
+            .then(o => {
+                if (!o.cheked) {
+                    telr.status(req.session.orderRef
+                        , function (err, response) {
+                            if (response.order.status.text == 'Paid') {
+                                Strore.findById(req.session.store._id)
+                                    .then(s => {
+                                        s.wallet = s.wallet + +response.order.amount;
+                                        s.save()
+                                            .then(s => {
+                                                o.cheked = 1;
+                                                return o.save()
+                                            })
+                                            .then(o => {
+                                                req.session.store.wallet = s.wallet;
+                                                res.redirect('/')
+                                            })
+                                    })
+                            }
+                        });
+                } else {
+                    res.redirect('/')
+                }
+            })
+    } else {
+        res.send('!note found')
+    }
 }
