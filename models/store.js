@@ -7,7 +7,8 @@ const storeSchema = mongoose.Schema({
     password: String,
     address: String,
     location: String,
-    clients: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Client' }]
+    clients: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Client' }],
+    orders: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Order' }]
 })
 
 module.exports = mongoose.model('Store', storeSchema);

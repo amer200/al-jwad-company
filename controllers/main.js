@@ -1,8 +1,12 @@
 const Strore = require('../models/store');
 const Client = require('../models/client');
-const axios = require('axios');
+const Order = require('../models/order');
 const bcrypt = require('bcryptjs');
 const salt = bcrypt.genSaltSync(10);
+var telr = require("telr-nodejs")('Vb8kW-zPQF9@pZX6', "28017", {
+    isTest: 1,
+    currency: "SAR"
+});
 exports.getDash = async (req, res) => {
     const clients = await Client.find({ store: req.session.store._id });
     res.render('main/dashbord/index', {
@@ -168,39 +172,29 @@ exports.logOut = (req, res) => {
 }
 /*****wallet **********************************************************/
 exports.addFund = (req, res) => {
-    const storeId = req.session.store._id;
     const amount = req.body.amount;
-    const data = {
-        ivp_framed: 2,
-        ivp_method: 'create',
-        ivp_store: process.env.TELR_AUTH,
-        ivp_authkey: `${process.env.TELR_AUTH}`,
-        ivp_desc: ' Description good',
-        ivp_cart: '4000000000000002',
-        ivp_currency: 'AED',
-        ivp_amount: 1000,
-        ivp_test: 1,
-        return_auth: 'https://teljoy.io/telr/new/trans.php?status=Success',
-        return_decl: 'https://teljoy.io/telr/new/trans.php?status=Declined',
-        return_can: 'https://teljoy.io/telr/new/trans.php?status=Cancelled',
-        bill_title: 'Mr',
-        bill_fname: 'Mohammad',
-        bill_sname: 'Maids',
-        bill_email: 'memeaktaa@gmail.com',
-        bill_addr1: 'Dubai',
-        bill_city: 'Dubai',
-        bill_country: 'AE',
-    };
-
-    axios.post('https://secure.telr.com/gateway/order.json', {
-        headers: {
-            'Authorization': `Basic ${process.env.TELR_AUTH}`
-        }
-    }, data)
-        .then((res) => {
-            console.log(`Status: ${res.status}`);
-            console.log('Body: ', res.data);
-        }).catch((err) => {
-            console.error(err);
-        });
+    telr.order({
+        orderId: new Date().valueOf(),
+        amount: amount,
+        returnUrl: "http://localhost:3000/",
+        declineUrl: "http://url-to-call-in-decline-transaction.com",
+        cancelUrl: "http://url-to-call-in-cancel-transaction.com",
+        description: "add to wallet"
+    }, function (err, createRes) {
+        console.log(createRes);
+        const order = new Order({
+            store: req.session.store._id,
+            amount: amount,
+            status: 0,
+            ref: createRes.order.ref,
+            url: createRes.order.url
+        })
+        order.save()
+            .then(o => {
+                res.redirect(o.url);
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    });
 }
