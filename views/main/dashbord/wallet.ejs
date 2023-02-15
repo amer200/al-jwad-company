@@ -10,7 +10,8 @@
                 <form action="/add-fund" method="post">
                     <div class="mb-3">
                         <label for="amount">المبلغ بالريال</label>
-                        <input type="text" class="form-control" name="amount" placeholder="0 ر.س" required>
+                        <input type="number" class="form-control" name="amount" placeholder="0 ر.س"
+                            style="text-align: right;" min="10" required>
                     </div>
                     <button class="btn btn-dark">تم</button>
                 </form>
