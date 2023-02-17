@@ -45899,7 +45899,7 @@ locationInput.addEventListener('keyup', () => {
     var condition = new RegExp(payload);
     const resultBox = document.getElementById('cities');
     const liResult = Array.from(document.getElementsByClassName('search-result'));
-    if(liResult.length > 0){
+    if (liResult.length > 0) {
         resultBox.innerHTML = "";
     }
     var result = cities.filter(function (el) {
