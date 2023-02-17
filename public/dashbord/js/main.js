@@ -73,6 +73,14 @@ const submitForm = () => {
     }
     myForm.submit();
 }
+const changePasswordVisabality = (id) => {
+    const input = document.getElementById(id);
+    if (input.type == 'password') {
+        return input.type = 'text';
+    } else {
+        return input.type = 'password';
+    }
+}
 /* end signup page */
 /* login page */
 const submitLoginForm = () => {

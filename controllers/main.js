@@ -110,7 +110,9 @@ exports.clientSearch = async (req, res) => {
 }
 /******************************************************************* */
 exports.getSignUP = (req, res) => {
-    res.render('main/dashbord/signup')
+    res.render('main/dashbord/signup', {
+        msg: false
+    })
 }
 exports.postSignUp = (req, res) => {
     const name = req.body.stroreName;
@@ -120,18 +122,30 @@ exports.postSignUp = (req, res) => {
     const address = req.body.street;
     const location = req.body.location;
     const hash = bcrypt.hashSync(password, salt);
-    const newStore = new Strore({
-        name: name,
-        mobile: mobile,
-        email: email,
-        password: hash,
-        address: address,
-        location: location,
-        wallet: 0
-    })
-    newStore.save()
-        .then(resu => {
-            res.redirect('/')
+    Strore.findOne({ email: email })
+        .then(s => {
+            if (s) {
+                res.render('main/dashbord/signup', {
+                    msg: 'البريد الالكتروني مستخدم من قبل !'
+                })
+            } else {
+                const newStore = new Strore({
+                    name: name,
+                    mobile: mobile,
+                    email: email,
+                    password: hash,
+                    address: address,
+                    location: location,
+                    wallet: 0
+                })
+                newStore.save()
+                    .then(resu => {
+                        res.redirect('/')
+                    })
+                    .catch(err => {
+                        console.log(err)
+                    })
+            }
         })
         .catch(err => {
             console.log(err)
