@@ -45910,11 +45910,15 @@ locationInput.addEventListener('keyup', () => {
         for (let i = 0; i <= 10; i++) {
             const li = document.createElement('li');
             li.classList = 'list-group-item search-result';
-            li.innerHTML = result[i].name_ar
+            li.setAttribute('onclick', 'chooseCity(this)')
+            li.innerHTML = result[i].name_ar;
             resultBox.appendChild(li)
         }
     }
 })
+const chooseCity = (city) => {
+    locationInput.value = city.innerHTML;
+}
 /* end signup page */
 /* login page */
 const submitLoginForm = () => {
