@@ -17,4 +17,8 @@ routes.post('/signup', mainController.postSignUp);
 routes.get('/login', mainController.getLogin);
 routes.post('/login', mainController.postLogin);
 routes.get('/logout', storeAuth.isAuth, mainController.logOut);
+routes.get('/forget-password', mainController.getforgetPass);
+routes.post('/forget-password', mainController.postForgetPassword);
+routes.get('/reset-store-pass/:code', mainController.getResetPass);
+routes.post('/reset-store-pass/:code', mainController.postResetPass);
 module.exports = routes

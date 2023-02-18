@@ -1,0 +1,69 @@
+<%- include('./includes/head') -%>
+    <link rel="stylesheet" href="/dashbord/css/signup.css">
+    <section class="vh-100" style="background-color: #ddd;">
+        <div class="container  h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col col-xl-10">
+                    <div class="card" style="border-radius: 1rem;">
+                        <div class="row g-0">
+                            <div class="col-md-12 col-lg-12 d-flex align-items-center">
+                                <div class="card-body text-black" style="height: 590px;
+                                padding: 0 25px;">
+
+                                    <form action="/reset-store-pass/<%=code%>" method="post" id="resetForm">
+                                        <div class="d-flex align-items-center mb-3 pb-1">
+                                            <img src="/imgs/logo.jpeg" style="width: 180px;
+                                                    height: 165px;" alt="logo">
+                                        </div>
+                                        <div class="form-outline mb-4"
+                                            style="width: 45%; display: inline-block; margin: 5px;">
+                                            <input type="password" id="password1" class="form-control form-control-lg"
+                                                name="password" required />
+                                            <i class="fa-solid fa-eye"
+                                                onclick="changePasswordVisabality('password1')"></i>
+                                            <label class="form-label" for="form2Example27">كلمة المرور</label>
+                                        </div>
+                                        <div class="form-outline mb-4"
+                                            style="width: 45%; display: inline-block; margin: 5px;">
+                                            <input type="password" id="password2" class=" form-control form-control-lg"
+                                                name="password2" required />
+                                            <i class="fa-solid fa-eye"
+                                                onclick="changePasswordVisabality('password2')"></i>
+                                            <label class="form-label" for="form2Example23"> تأكيد كلمة
+                                                المرور</label>
+                                        </div>
+                                        <button class="btn btn-dark btn-lg btn-block" type="button"
+                                            onclick="submitResetForm()">دخول</button>
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script>
+        const changePasswordVisabality = (id) => {
+            const input = document.getElementById(id);
+            if (input.type == 'password') {
+                return input.type = 'text';
+            } else {
+                return input.type = 'password';
+            }
+        }
+        const submitResetForm = () => {
+            const form = document.getElementById('resetForm');
+            const password1 = document.getElementById('password1');
+            const password2 = document.getElementById('password2');
+            if (password1.value.length < 8) {
+                return alert('كمة المرور يجب ان تكون اكثر من 8 احرف وارقام')
+            }
+            if (password1.value != password2.value) {
+                return alert('كمة المرور غير متطابقة')
+            }
+            form.submit();
+        }
+    </script>
+    <%- include('includes/footer') -%>

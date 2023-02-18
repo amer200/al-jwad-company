@@ -2,11 +2,22 @@ const Strore = require('../models/store');
 const Client = require('../models/client');
 const Order = require('../models/order');
 const bcrypt = require('bcryptjs');
+const ejs = require('ejs');
 const salt = bcrypt.genSaltSync(10);
+const nodemailer = require('nodemailer');
 const telr = require("telr-nodejs")(process.env.TELR_AUTH, process.env.TELR_ID, {
     isTest: 1,
     currency: "SAR"
 });
+/* nodemailer config */
+const transport = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+        user: process.env.GMAIL_USER,
+        pass: process.env.PASSWORD,
+    },
+});
+/*************************** */
 exports.getDash = async (req, res) => {
     const clients = await Client.find({ store: req.session.store._id });
     console.log(req.session.store);
@@ -247,4 +258,90 @@ exports.checkOrder = (req, res) => {
     } else {
         res.send('!note found')
     }
+}
+/* forget password */
+exports.getforgetPass = (req, res) => {
+    res.render('main/dashbord/forget-pass');
+}
+exports.postForgetPassword = (req, res) => {
+    const email = req.body.email;
+    const code = (length) => {
+        let result = '';
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        const charactersLength = characters.length;
+        let counter = 0;
+        while (counter < length) {
+            result += characters.charAt(Math.floor(Math.random() * charactersLength));
+            counter += 1;
+        }
+        return result;
+    }
+    Strore.findOne({ email: email })
+        .then(s => {
+            if (s) {
+                s.code = code(50);
+                return s.save();
+            } else {
+                return false
+            }
+        })
+        .then(s => {
+            if (s) {
+                ejs.renderFile(__dirname + '/reset-pass-email.ejs', { name: s.name, code: s.code }, (err, data) => {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        var mailOptions = {
+                            from: 'support@gotex.com',
+                            to: s.email,
+                            subject: 'reset your password',
+                            html: data
+                        };
+
+                        transport.sendMail(mailOptions, (error, info) => {
+                            if (error) {
+                                return console.log(error);
+                            }
+                            console.log('Message sent: %s', info.messageId);
+                        });
+                    }
+                });
+                res.send(`تم ارسال رسالة لاستعادة كلمة المرور على البريد : ${email}`)
+            } else {
+                res.render('main/dashbord/forget-pass')
+            }
+        })
+        .catch(err => {
+            console.log(err)
+        })
+}
+exports.getResetPass = (req, res) => {
+    const code = req.params.code;
+    res.render('main/dashbord/reset-pass', {
+        code: code
+    })
+}
+exports.postResetPass = (req, res) => {
+    const code = req.params.code;
+    const password = req.body.password;
+    const hash = bcrypt.hashSync(password, salt);
+    Strore.findOne({ code: code })
+        .then(s => {
+            if (s) {
+                s.password = hash;
+                return s.save();
+            } else {
+                return false
+            }
+        })
+        .then(s => {
+            if (s) {
+                res.redirect('/login');
+            } else {
+                res.send('err')
+            }
+        })
+        .catch(err => {
+            console.log(err);
+        })
 }
