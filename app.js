@@ -25,7 +25,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 /********************************************************************************* */
 const mainRoutes = require('./routes/main');
+const adminRoutes = require('./routes/admin');
 app.use('/', mainRoutes);
+app.use('/admin', adminRoutes);
 /********************************************************************************* */
 mongoose.connect(dbUrl)
     .then(resu => {
