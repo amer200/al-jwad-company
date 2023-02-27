@@ -9,8 +9,89 @@
                             <div class="btn-group store-btn-group" role="group" aria-label="Basic mixed styles example">
                                 <button type="button" class="btn btn-danger"
                                     onclick="removeStore('<%=s._id%>', '<%=s.name%>')">حذف</button>
-                                <button type="button" class="btn btn-warning">ارسل ايميل</button>
-                                <button type="button" class="btn btn-success">عرض معلومات</button>
+                                <button type="button" class="btn btn-warning" data-bs-toggle="modal"
+                                    data-bs-target="#sendemailmodal<%=s._id%>">ارسل ايميل</button>
+                                <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                                    data-bs-target="#storemodal<%=s._id%>">عرض معلومات</button>
+                            </div>
+                            <div class="modal fade" id="storemodal<%=s._id%>" data-bs-backdrop="static"
+                                data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="staticBackdropLabel">
+                                                <%=s.name%>
+                                            </h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div>
+                                                <div class="mb-3">
+                                                    <label for="name" class="form-label">اسم المتجر</label>
+                                                    <input type="text" class="form-control" value="<%=s.name%>"
+                                                        readonly>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="name" class="form-label">الجوال</label>
+                                                    <input type="text" class="form-control" value="<%=s.mobile%>"
+                                                        readonly>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="name" class="form-label">الايميل</label>
+                                                    <input type="text" class="form-control" value="<%=s.email%>"
+                                                        readonly>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="name" class="form-label">الموقع</label>
+                                                    <input type="text" class="form-control" value="<%=s.location%>"
+                                                        readonly>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="name" class="form-label">العنوان</label>
+                                                    <input type="text" class="form-control" value="<%=s.address%>"
+                                                        readonly>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--------------------------------------->
+                            <!--------------------------------------->
+                            <div class="modal fade" id="sendemailmodal<%=s._id%>" data-bs-backdrop="static"
+                                data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="staticBackdropLabel">ارسل ايميل الى متجر
+                                                <%=s.name%>
+                                            </h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form action="/admin/send-store-email/<%=s._id%>" method="post">
+                                                <div class="mb-3">
+                                                    <label for="msg" class="form-label">الرسالة</label>
+                                                    <textarea name="msg" class="form-control" cols="30"
+                                                        rows="10"></textarea>
+                                                </div>
+                                                <button type="submit" class="btn btn-dark">ارسل</button>
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                     </li>
                     <%});%>
