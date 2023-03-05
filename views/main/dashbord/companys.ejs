@@ -5,6 +5,38 @@
             <% if(c.status=="active" ){ %>
                 <li class="list-group-item">
                     <img src="/imgs/saee.jpg" alt="saee">
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#saeemodal">
+                        طلب
+                    </button>
+                    <div class="modal fade" id="saeemodal" data-bs-backdrop="static" data-bs-keyboard="false"
+                        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog" style="max-width: 60%;">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="staticBackdropLabel">ساعي</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="container-fluid">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <h3>بينات الشحنة</h3>
+                                                <div class="mb-3">
+                                                    <label for=""></label>
+                                                </div>
+                                            </div>
+                                            <div class="col-6"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">حفظ</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </li>
                 <%}%>
                     <%});%>
