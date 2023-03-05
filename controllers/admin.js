@@ -1,4 +1,5 @@
 const Strore = require('../models/store');
+const Company = require('../models/company');
 const Client = require('../models/client');
 const Order = require('../models/order');
 const bcrypt = require('bcryptjs');
@@ -15,10 +16,12 @@ const transport = nodemailer.createTransport({
 /*************************** */
 exports.getIndex = async (req, res) => {
     const stores = await Strore.find();
+    const companys = await Company.find();
     // const clients = await Client.find();
     // const orders = await Order.find();
     res.render('admin/index', {
-        stores: stores
+        stores: stores,
+        companys: companys
     });
 }
 /* stores config */

@@ -1,0 +1,12 @@
+<div class="row d-none" id="companies">
+    <h3>شركات الشحن المتاحة</h3>
+    <ul class="list-group companys">
+        <%companys.forEach(c=> { %>
+            <% if(c.status=="active" ){ %>
+                <li class="list-group-item">
+                    <img src="/imgs/saee.jpg" alt="saee">
+                </li>
+                <%}%>
+                    <%});%>
+    </ul>
+</div>

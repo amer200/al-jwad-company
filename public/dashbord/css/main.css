@@ -1240,9 +1240,11 @@ body {
     border-top: none;
     border-right: none;
 }
+
 #sidebar-wrapper i {
     color: #fff;
 }
+
 #wrapper.toggled #sidebar-wrapper {
     width: 250px;
 }
@@ -1351,4 +1353,9 @@ body {
     text-align: center;
     font-size: 1rem;
     font-weight: 800;
+}
+
+/* companys*/
+.companys img {
+    width: 120px;
 }

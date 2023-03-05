@@ -65,3 +65,16 @@ li {
 .store-btn-group {
     float: right;
 }
+
+/* companys */
+.companys img {
+    width: 98px;
+    position: relative;
+    top: -40px;
+    left: 185px;
+}
+
+.companys li {
+    height: 90px;
+    padding-top: 25px;
+}

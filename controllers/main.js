@@ -1,10 +1,12 @@
 const Strore = require('../models/store');
+const Company = require('../models/company');
 const Client = require('../models/client');
 const Order = require('../models/order');
 const bcrypt = require('bcryptjs');
 const ejs = require('ejs');
 const salt = bcrypt.genSaltSync(10);
 const nodemailer = require('nodemailer');
+const company = require('../models/company');
 const telr = require("telr-nodejs")(process.env.TELR_AUTH, process.env.TELR_ID, {
     isTest: 1,
     currency: "SAR"
@@ -20,9 +22,11 @@ const transport = nodemailer.createTransport({
 /*************************** */
 exports.getDash = async (req, res) => {
     const clients = await Client.find({ store: req.session.store._id });
+    const Company = await company.find();
     console.log(req.session.store);
     res.render('main/dashbord/index', {
         clients: clients,
+        companys: Company,
         wallet: req.session.store.wallet
     })
 }

@@ -1,4 +1,19 @@
-<div class="col-6 d-none all-forms" id="company">
-    <h1>we are doinge some work here ):</h1>
-    <h2>it's comming soon</h2>
+<div class="col-4 d-none all-forms" id="company">
+    <h3>قائمة شركات الشحن</h3>
+    <ul class="list-group companys">
+        <%companys.forEach(c=> { %>
+            <li class="list-group-item">
+                <div class="form-check form-switch">
+                    <% if(c.status=="active" ){ %>
+                        <input class="form-check-input" type="checkbox" id="co<%=c._id%>" checked
+                            onchange="changeCompanyStutus('<%=c._id%>')">
+                        <%}else{%>
+                            <input class="form-check-input" type="checkbox" id="co<%=c._id%>"
+                                onchange="changeCompanyStutus('<%=c._id%>')">
+                            <%}%>
+                </div>
+                <img src="/imgs/saee.jpg" alt="saee">
+            </li>
+            <%});%>
+    </ul>
 </div>
