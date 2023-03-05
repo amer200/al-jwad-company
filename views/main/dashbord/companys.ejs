@@ -29,7 +29,8 @@
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="name" class="form-label">الجوال</label>
-                                                    <input type="number" class="form-control" id="p_mobile" value="">
+                                                    <input type="tel" class="form-control" id="p_mobile"
+                                                        onkeypress="return onlyNumberKey(event)">
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="name" class="form-label">عنوان المستودع</label>
@@ -41,11 +42,13 @@
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="name" class="form-label">وزن الشحنة بالكجم</label>
-                                                    <input type="number" class="form-control" id="weight" value="0">
+                                                    <input type="text" class="form-control" id="weight"
+                                                        onkeypress="return onlyNumberKey(event)" value="">
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="name" class="form-label">الكمية</label>
-                                                    <input type="number" class="form-control" id="quantity" value="0">
+                                                    <input type="text" class="form-control" id="quantity"
+                                                        onkeypress="return onlyNumberKey(event)" value="">
                                                 </div>
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="checkbox" value="0"

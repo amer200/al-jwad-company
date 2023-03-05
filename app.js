@@ -21,12 +21,14 @@ app.use(session({
 /********************************************************************************* */
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
-app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 /********************************************************************************* */
 const mainRoutes = require('./routes/main');
+const saeeRoutes = require('./routes/saee');
 const adminRoutes = require('./routes/admin');
 app.use('/', mainRoutes);
+app.use('/saee', saeeRoutes);
 app.use('/admin', adminRoutes);
 /********************************************************************************* */
 mongoose.connect(dbUrl)

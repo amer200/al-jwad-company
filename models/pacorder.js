@@ -2,7 +2,9 @@ const mongoose = require('mongoose');
 
 
 const orderSchema = mongoose.Schema({
+    company: String,
     sender: {
+        id: String,
         name: String,
         mobile: Number,
         address: String,
@@ -18,7 +20,8 @@ const orderSchema = mongoose.Schema({
         mobile: Number,
         address: String,
         city: String
-    }
+    },
+    cashondelivery: Number
 })
 
 module.exports = mongoose.model('Pacorder', orderSchema);

@@ -23,7 +23,6 @@ const transport = nodemailer.createTransport({
 exports.getDash = async (req, res) => {
     const clients = await Client.find({ store: req.session.store._id });
     const Company = await company.find();
-    console.log(req.session.store);
     res.render('main/dashbord/index', {
         clients: clients,
         companys: Company,
