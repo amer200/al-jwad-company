@@ -2,13 +2,23 @@ const mongoose = require('mongoose');
 
 
 const orderSchema = mongoose.Schema({
-    store: { type: mongoose.Schema.Types.ObjectId, ref: 'Store' },
+    sender: {
+        name: String,
+        mobile: Number,
+        address: String,
+        city: String
+
+    },
     package: {
         weight: Number,
         quantity: Number,
-        desc: String
     },
-    clints: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Client' }]
+    clints: {
+        name: String,
+        mobile: Number,
+        address: String,
+        city: String
+    }
 })
 
-module.exports = mongoose.model('Order', orderSchema);
+module.exports = mongoose.model('Pacorder', orderSchema);
