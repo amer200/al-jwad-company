@@ -90,7 +90,42 @@ exports.aramexApi = async (req, res) => {
     clientInfo = new aramex.ClientInfo();
     aramex.Aramex.setClientInfo(clientInfo);
 
-    aramex.Aramex.setConsignee(new aramex.Consignee());
+    aramex.Aramex.setConsignee(new aramex.Consignee({
+        "Reference1": "",
+        "Reference2": "",
+        "AccountNumber": "",
+        "PartyAddress": {
+            "Line1": "1, bhat ji ki badi",
+            "Line2": "",
+            "Line3": "",
+            "City": "Dubai",
+            "StateOrProvinceCode": "",
+            "PostCode": "",
+            "CountryCode": "AE",
+            "Longitude": 0,
+            "Latitude": 0,
+            "BuildingNumber": "",
+            "BuildingName": "",
+            "Floor": "",
+            "Apartment": "",
+            "POBox": null,
+            "Description": ""
+        },
+        "Contact": {
+            "Department": "",
+            "PersonName": "Viki",
+            "Title": "",
+            "CompanyName": "hgh pvt ltd",
+            "PhoneNumber1": "8454097313",
+            "PhoneNumber1Ext": "",
+            "PhoneNumber2": "",
+            "PhoneNumber2Ext": "",
+            "FaxNumber": "",
+            "CellPhone": "8454097313",
+            "EmailAddress": "vi@gmail.com",
+            "Type": ""
+        }
+    }));
 
     aramex.Aramex.setShipper(new aramex.Shipper({
         "Reference1": "",
@@ -115,21 +150,56 @@ exports.aramexApi = async (req, res) => {
         },
         "Contact": {
             "Department": "",
-            "PersonName": "Dosan",
+            "PersonName": "Amer Mostafa",
             "Title": "",
             "CompanyName": "jha pvt",
-            "PhoneNumber1": "25655666",
+            "PhoneNumber1": "+201152306375",
             "PhoneNumber1Ext": "",
             "PhoneNumber2": "",
             "PhoneNumber2Ext": "",
             "FaxNumber": "",
             "CellPhone": "25655666",
-            "EmailAddress": "dosan@gmail.com",
+            "EmailAddress": "amermostaafa@gmai;.com",
             "Type": ""
         }
     }));
 
-    aramex.Aramex.setThirdParty(new aramex.ThirdParty());
+    aramex.Aramex.setThirdParty(new aramex.ThirdParty({
+        "Reference1": "",
+        "Reference2": "",
+        "AccountNumber": "",
+        "PartyAddress": {
+            "Line1": "",
+            "Line2": "",
+            "Line3": "",
+            "City": "",
+            "StateOrProvinceCode": "",
+            "PostCode": "",
+            "CountryCode": "",
+            "Longitude": 0,
+            "Latitude": 0,
+            "BuildingNumber": null,
+            "BuildingName": null,
+            "Floor": null,
+            "Apartment": null,
+            "POBox": null,
+            "Description": null
+        },
+        "Contact": {
+            "Department": "",
+            "PersonName": "",
+            "Title": "",
+            "CompanyName": "",
+            "PhoneNumber1": "",
+            "PhoneNumber1Ext": "",
+            "PhoneNumber2": "",
+            "PhoneNumber2Ext": "",
+            "FaxNumber": "",
+            "CellPhone": "",
+            "EmailAddress": "",
+            "Type": ""
+        }
+    }));
 
     aramex.Aramex.setDetails(1);
 
