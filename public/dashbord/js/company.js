@@ -77,7 +77,9 @@ const submitOrder = (url, co) => {
             return response.json()
         })
         .then(response => {
-            console.log(response)
+            if(response.status == 200){
+                alert("تم اضافة الشحنة")
+            }
         })
         .catch(err => {
             console.log(err)

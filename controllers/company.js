@@ -2,6 +2,7 @@ const Company = require('../models/company');
 const Pacorder = require('../models/pacorder');
 const aramex = require('aramex-api');
 const axios = require('axios');
+const { response } = require('express');
 exports.changeStatus = async (req, res) => {
     const id = req.params.id;
     Company.findById(id)
@@ -23,6 +24,7 @@ exports.changeStatus = async (req, res) => {
         })
 }
 exports.newSaeeOrder = (req, res) => {
+    console.log(req.body)
     const p_name = req.body.p_name;
     const p_city = req.body.p_city;
     const p_mobile = req.body.p_mobile;
@@ -65,10 +67,10 @@ exports.newSaeeOrder = (req, res) => {
                 url: 'https://www.k-w-h.com/deliveryrequest/new',
                 data: {
                     secret: '$2y$10$.TnZcg0LUirhXlUzcmSkEOvUIAciQE9nSmfOL8SYEkJf6xEgYP0pK',
-                    p_name: req.body.p_name,
-                    p_city: req.body.p_city,
-                    p_mobile: +req.body.p_mobile,
-                    p_streetaddress: req.body.p_streetaddress,
+                    name: req.body.p_name,
+                    city: req.body.p_city,
+                    mobile: +req.body.p_mobile,
+                    streetaddress: req.body.p_streetaddress,
                     cashondelivery: req.body.cashondelivery,
                     weight: +req.body.weight,
                     quantity: +req.body.quantity,
@@ -79,7 +81,8 @@ exports.newSaeeOrder = (req, res) => {
                 }
             })
                 .then(function (response) {
-                    console.log(response);
+                    console.log(response)
+                    return res.status(200);
                 })
         })
         .catch(err => {
