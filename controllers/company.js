@@ -87,90 +87,59 @@ exports.newSaeeOrder = (req, res) => {
         })
 }
 exports.aramexApi = async (req, res) => {
-    try {
-        clientInfo = new aramex.ClientInfo();
-        // {
-        //     "User Name": "testingapi@aramex.com",
-        //     "Password ": "R12345678$r",
-        //     "Version": "v1",
-        //     "Account Entity": "LON",
-        //     "Account Number": "102331",
-        //     "Account PIN": "321321",
-        //     "Account Country Code": "GB"
-        // })
-        aramex.Aramex.setClientInfo(clientInfo);
+    clientInfo = new aramex.ClientInfo();
+    aramex.Aramex.setClientInfo(clientInfo);
 
-        aramex.Aramex.setConsignee(new aramex.Consignee({
-            'Reference1': 'Ref 333333',
-            'Reference2': 'Ref 444444',
-            'AccountNumber': '',
-            'PartyAddress': {
-                'Line1': '15 ABC St',
-                'Line2': '',
-                'Line3': '',
-                'City': 'Dubai',
-                'StateOrProvinceCode': '',
-                'PostCode': '',
-                'CountryCode': 'AE'
-            },
-            'Contact': {
-                'Department': '',
-                'PersonName': 'Mazen',
-                'Title': '',
-                'CompanyName': 'Aramex',
-                'PhoneNumber1': '6666666',
-                'PhoneNumber1Ext': '155',
-                'PhoneNumber2': '',
-                'PhoneNumber2Ext': '',
-                'FaxNumber': '',
-                'CellPhone': '',
-                'EmailAddress': 'mazen@aramex.com',
-                'Type': ''
-            }
-        }));
+    aramex.Aramex.setConsignee(new aramex.Consignee());
 
-        aramex.Aramex.setShipper(new aramex.Shipper({
-            'Reference1': 'Ref 111111',
-            'Reference2': 'Ref 222222',
-            'AccountNumber': '20016',
-            'PartyAddress': {
-                'Line1': 'Mecca St',
-                'Line2': '',
-                'Line3': '',
-                'City': 'Amman',
-                'StateOrProvinceCode': '',
-                'PostCode': '',
-                'CountryCode': 'Jo'
-            },
-            'Contact': {
-                'Department': '',
-                'PersonName': 'Michael',
-                'Title': '',
-                'CompanyName': 'Aramex',
-                'PhoneNumber1': '5555555',
-                'PhoneNumber1Ext': '125',
-                'PhoneNumber2': '',
-                'PhoneNumber2Ext': '',
-                'FaxNumber': '',
-                'CellPhone': '07777777',
-                'EmailAddress': 'michael@aramex.com',
-                'Type': ''
-            }
-        }));
+    aramex.Aramex.setShipper(new aramex.Shipper({
+        "Reference1": "",
+        "Reference2": "",
+        "AccountNumber": "60531487",
+        "PartyAddress": {
+            "Line1": "dwayne streey 123, jhsg",
+            "Line2": "",
+            "Line3": "",
+            "City": "Makkah",
+            "StateOrProvinceCode": "",
+            "PostCode": "24211",
+            "CountryCode": "SAU",
+            "Longitude": 0,
+            "Latitude": 0,
+            "BuildingNumber": null,
+            "BuildingName": null,
+            "Floor": null,
+            "Apartment": null,
+            "POBox": null,
+            "Description": null
+        },
+        "Contact": {
+            "Department": "",
+            "PersonName": "Dosan",
+            "Title": "",
+            "CompanyName": "jha pvt",
+            "PhoneNumber1": "25655666",
+            "PhoneNumber1Ext": "",
+            "PhoneNumber2": "",
+            "PhoneNumber2Ext": "",
+            "FaxNumber": "",
+            "CellPhone": "25655666",
+            "EmailAddress": "dosan@gmail.com",
+            "Type": ""
+        }
+    }));
 
-        aramex.Aramex.setThirdParty(new aramex.ThirdParty());
+    aramex.Aramex.setThirdParty(new aramex.ThirdParty());
 
-        aramex.Aramex.setDetails(1);
+    aramex.Aramex.setDetails(1);
 
-        aramex.Aramex.setDimension();
+    aramex.Aramex.setDimension();
 
-        aramex.Aramex.setWeight();
-        let result = await aramex.Aramex.createShipment([{ PackageType: 'Box', Quantity: 2, Weight: { Value: 0.5, Unit: 'Kg' }, Comments: 'Docs', Reference: '' }]);
-        console.log(result);
-        res.json({
-            result: result
-        })
-    } catch (err) {
-        console.log(err)
-    }
+    aramex.Aramex.setWeight();
+
+    //Creating shipment
+
+    let result = await aramex.Aramex.createShipment([{ PackageType: 'Box', Quantity: 2, Weight: { Value: 0.5, Unit: 'Kg' }, Comments: 'Docs', Reference: '' }]);
+    res.json(result)
+    //tracking shipment let result = await aramex.Aramex.track(['3915342793', '3915342826']);
 }
