@@ -6,7 +6,8 @@ const submitOrder = (url, co) => {
     const p_city = document.querySelector(`#${co} #p_city`);
     const weight = document.querySelector(`#${co} #weight`);
     const quantity = document.querySelector(`#${co} #quantity`)
-    const cashondelivery = document.querySelector(`#${co} #cashondelivery`)
+    const declared_value = document.querySelector(`#${co} #declared_value`);
+    const cashondelivery = document.querySelector(`#${co} #cashondelivery`);
     if (cashondelivery.checked) {
         cashondelivery.value = 1;
     }
@@ -51,6 +52,10 @@ const submitOrder = (url, co) => {
         console.log("q")
         return quantity.classList.add('err-border');
     }
+    if (!declared_value.value) {
+        console.log('declared_value');
+        return declared_value.classList.add('err-border');
+    }
     const data = {
         p_name: p_name.value,
         p_city: p_city.value,
@@ -62,7 +67,8 @@ const submitOrder = (url, co) => {
         c_name: c_name.value,
         c_city: c_city.value,
         c_streetaddress: c_streetaddress.value,
-        c_mobile: c_mobile.value
+        c_mobile: c_mobile.value,
+        declared_value: declared_value.value
 
     }
     fetch(url, {
@@ -77,8 +83,8 @@ const submitOrder = (url, co) => {
             return response.json()
         })
         .then(data => {
-            console.log(data)
             alert(data.msg)
+            location.reload();
         })
         .catch(err => {
             console.log(err)

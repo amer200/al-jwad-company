@@ -1,74 +1,27 @@
 <link rel="stylesheet" href="/dashbord/css/package.css">
 <div class="row d-none" id="package-box">
-    <div class="col-12">
-        <div class="btn-group" role="group" aria-label="Basic example">
-            <div class="btn-group">
-                <a href="#" class="btn btn-primary active" aria-current="page">جميع الشحنات</a>
-                <a href="#" class="btn btn-primary">نوع الشحنة</a>
-                <a href="#" class="btn btn-primary">نوع الشحنة</a>
-            </div>
-        </div>
-    </div>
-    <div class="col-12">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">اسم العميل</th>
-                    <th scope="col">شركات الشحن</th>
-                    <th scope="col">نوع الشحن</th>
-                    <th scope="col">قيمة الشحن</th>
-                    <th scope="col">المبلغ</th>
-                    <th scope="col">AWB</th>
-                    <th scope="col">تاريخ الاستلام</th>
-                    <th scope="col">الحالة</th>
-                    <th scope="col">الاجراءات</th>
-
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td class="cliint-name">عامر مصطفى</td>
-                    <td class="company"><img src="/imgs/shipp/client-1.png" alt=""></td>
-                    <td class="shipp-type">online</td>
-                    <td class="price">35(sar)</td>
-                    <td class="price">27(sar)</td>
-                    <td class="awb">151548946465416516</td>
-                    <td class="date">12-5-2023</td>
-                    <td class="status">shipping</td>
-                    <td class="steps"><button class="btn btn-success">عرض</button></td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td class="cliint-name">خالد </td>
-                    <td class="company"><img src="/imgs/shipp/client-2.png" alt=""></td>
-                    <td class="shipp-type">online</td>
-                    <td class="price">44(sar)</td>
-                    <td class="price">27(sar)</td>
-                    <td class="awb">151548946465416516</td>
-                    <td class="date">12-5-2023</td>
-                    <td class="status">shipping</td>
-                    <td class="steps"><button class="btn btn-success">عرض</button></td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td class="cliint-name">احمد محمد</td>
-                    <td class="company"><img src="/imgs/shipp/client-3.png" alt=""></td>
-                    <td class="shipp-type">online</td>
-                    <td class="price">65(sar)</td>
-                    <td class="price">27(sar)</td>
-                    <td class="awb">151548946465416516</td>
-                    <td class="date">12-5-2023</td>
-                    <td class="status">shipping</td>
-                    <td class="steps"><button class="btn btn-success">عرض</button></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <div class="add-btn">
-        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-pack-mdal"><i
-                class="fa-solid fa-plus"></i></button>
-    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">شركة الشحن</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <% let i=0 %>
+                <%pacorder.forEach(p=>{%>
+                    <tr>
+                        <th scope="row">
+                            <%=i++%>
+                        </th>
+                        <td>
+                            <%=p.company%>
+                        </td>
+                        <td><a href="/saee/saee-print-sticker/<%=p.details.waybill%>">طباعة استيكر</a></td>
+                    </tr>
+                    <%})%>
+        </tbody>
+    </table>
 </div>
 <script src="/dashbord/js/package.js"></script>

@@ -4,7 +4,7 @@
         <%companys.forEach(c=> { %>
             <% if(c.status=="active" ){ %>
                 <li class="list-group-item">
-                    <img src="<%=c.imgs%>" alt="<%=c.name%>">
+                    <img src='/imgs/saee.jpg' alt="<%=c.name%>">
                     <!-- Button trigger modal -->
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                         data-bs-target="#<%=c.name%>modal">
@@ -53,6 +53,11 @@
                                                     <input type="text" class="form-control" id="quantity"
                                                         onkeypress="return onlyNumberKey(event)" value="">
                                                 </div>
+                                                <div class="mb-3">
+                                                    <label for="name" class="form-label">سعر الشحنة</label>
+                                                    <input type="text" class="form-control" id="declared_value"
+                                                        onkeypress="return onlyNumberKey(event)" value="">
+                                                </div>
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="checkbox" value="0"
                                                         id="cashondelivery">
@@ -80,7 +85,7 @@
                                                     <input type="text" class="form-control" id="c_city">
                                                 </div>
                                                 <div class="mb-3">
-                                                    <img src="<%=c.imgs%>" alt="saee" style="width: 95%;">
+                                                    <img src="/imgs/saee.jpg" alt="saee" style="width: 95%;">
                                                 </div>
                                             </div>
                                         </div>

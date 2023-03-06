@@ -1,5 +1,6 @@
 const Company = require('../models/company');
 const Pacorder = require('../models/pacorder');
+const Store = require('../models/store');
 const aramex = require('aramex-api');
 const axios = require('axios');
 const { response } = require('express');
@@ -50,19 +51,58 @@ exports.newSaeeOrder = (req, res) => {
             c_name: req.body.c_name,
             c_city: req.body.c_city,
             c_streetaddress: req.body.c_streetaddress,
-            c_mobile: +req.body.c_mobile
+            c_mobile: +req.body.c_mobile,
+            declared_value: +req.body.declared_value
         }
     })
         .then(response => {
             if (response.data.success) {
-                res.status(200).json({
-                    msg: "تم اضافة الشحنة "
+                const newPacorder = new Pacorder({
+                    company: "saee",
+                    store: req.session.store._id,
+                    details: {
+                        waybill: response.data.waybill
+                    }
                 })
+                newPacorder.save()
+                    .then(o => {
+                        Store.findById(req.session.store._id)
+                            .then(s => {
+                                s.pacorder.push(o._id)
+                                return s.save()
+                            })
+                            .then(s => {
+                                res.status(200).json({
+                                    msg: "تم اضافة الشحنة ",
+                                })
+                            })
+                    })
             } else {
+                console.log(response.data)
                 res.status(403).json({
                     msg: response.data.error
                 })
             }
+        })
+        .catch(err => {
+            console.log(err)
+        })
+}
+exports.getSaeeSticker = (req, res) => {
+    const orderId = req.params.id;
+    const waybill = req.params.waybill;
+    axios({
+        method: 'get',
+        url: `https://corporate.k-w-h.com/deliveryrequest/printsticker/${waybill}`,
+        data: {
+            secret: process.env.SAEE_KEY
+        }
+    })
+        .then(response => {
+            const sticker = response.data;
+            res.render('main/dashbord/includes/saee-sticer', {
+                data: sticker
+            })
         })
         .catch(err => {
             console.log(err)
