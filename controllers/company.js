@@ -64,7 +64,7 @@ exports.newSaeeOrder = (req, res) => {
                 method: 'post',
                 url: 'https://www.k-w-h.com/deliveryrequest/new',
                 data: {
-                    secret: '$2y$10$eYSXofhGvjNiG4wO.a0m6OzCrYmYdBrV2NPpD4ih2Ib03G9o2E6we',
+                    secret: '$2y$10$.TnZcg0LUirhXlUzcmSkEOvUIAciQE9nSmfOL8SYEkJf6xEgYP0pK',
                     p_name: req.body.p_name,
                     p_city: req.body.p_city,
                     p_mobile: +req.body.p_mobile,
@@ -121,7 +121,7 @@ exports.aramexApi = async (req, res) => {
             EmailAddress = null,
             PhoneNumber1 = c_PhoneNumber1,
             PhoneNumber1Ext = null,
-            CellPhone = null,
+            CellPhone = '9661123151',
             Line1 = c_Line1,
             CountryCode = 'SAU',
             City = c_City));
