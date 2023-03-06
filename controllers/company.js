@@ -135,6 +135,7 @@ exports.aramexApi = async (req, res) => {
         //Creating shipment
 
         let result = await aramex.Aramex.createShipment([{ PackageType: 'Box', Quantity: +quantity, Weight: { Value: +weight, Unit: 'Kg' }, Comments: null, Reference: null }]);
+        console.log(result)
         res.json(result)
     } catch (err) {
         console.log(err)
