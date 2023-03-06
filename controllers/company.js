@@ -88,17 +88,16 @@ exports.newSaeeOrder = (req, res) => {
 }
 exports.aramexApi = async (req, res) => {
     try {
-        clientInfo = new aramex.ClientInfo({
-            "User Name": "testingapi@aramex.com",
-            "Password ": "R12345678$r",
-            "Version": "v1",
-            "Account Entity": "LON",
-            "Account Number": "102331",
-            "Account PIN": "321321",
-            "Account Country Code": "GB",
-            "Source": ""
-        });
-
+        clientInfo = new aramex.ClientInfo();
+        // {
+        //     "User Name": "testingapi@aramex.com",
+        //     "Password ": "R12345678$r",
+        //     "Version": "v1",
+        //     "Account Entity": "LON",
+        //     "Account Number": "102331",
+        //     "Account PIN": "321321",
+        //     "Account Country Code": "GB"
+        // })
         aramex.Aramex.setClientInfo(clientInfo);
 
         aramex.Aramex.setConsignee(new aramex.Consignee({
