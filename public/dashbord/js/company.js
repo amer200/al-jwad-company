@@ -75,13 +75,16 @@ const submitOrder = (url, co) => {
     })
         .then(response => {
             if (response.status == 200) {
-                alert("تم اضافة الشحنة")
+                console.log(response)
+                return alert("تم اضافة الشحنة")
             } else {
-                alert('خطاء !!')
+                console.log(response)
+                return alert('خطاء !!')
             }
         })
         .catch(err => {
             console.log(err)
+            alert('خطاء!!')
         })
 }
 

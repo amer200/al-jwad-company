@@ -82,11 +82,12 @@ exports.newSaeeOrder = (req, res) => {
             })
                 .then(function (response) {
                     console.log(response)
-                    return res.status(200);
+                    res.status(200);
                 })
         })
         .catch(err => {
             console.log(err)
+            res.status(500)
         })
 }
 exports.aramexApi = async (req, res) => {
