@@ -4,17 +4,20 @@
         <%companys.forEach(c=> { %>
             <% if(c.status=="active" ){ %>
                 <li class="list-group-item">
-                    <img src="/imgs/saee.jpg" alt="saee">
+                    <img src="<%=c.imgs%>" alt="<%=c.name%>">
                     <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#saeemodal">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                        data-bs-target="#<%=c.name%>modal">
                         طلب
                     </button>
-                    <div class="modal fade" id="saeemodal" data-bs-backdrop="static" data-bs-keyboard="false"
+                    <div class="modal fade" id="<%=c.name%>modal" data-bs-backdrop="static" data-bs-keyboard="false"
                         tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog" style="max-width: 60%;">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="staticBackdropLabel">ساعي</h5>
+                                    <h5 class="modal-title" id="staticBackdropLabel">
+                                        <%=c.name%>
+                                    </h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                         aria-label="Close"></button>
                                 </div>
@@ -77,14 +80,15 @@
                                                     <input type="text" class="form-control" id="c_city">
                                                 </div>
                                                 <div class="mb-3">
-                                                    <img src="/imgs/saee.jpg" alt="saee" style="width: 95%;">
+                                                    <img src="<%=c.imgs%>" alt="saee" style="width: 95%;">
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" onclick="submitOrder()">حفظ</button>
+                                    <button type="button" class="btn btn-secondary"
+                                        onclick="submitOrder('/<%=c.name%>/add-new-order', '<%=c.name%>modal')">حفظ</button>
                                 </div>
                             </div>
                         </div>

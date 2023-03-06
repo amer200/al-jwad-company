@@ -29,7 +29,7 @@ const saeeRoutes = require('./routes/saee');
 const aramexRoutes = require('./routes/aramex');
 const adminRoutes = require('./routes/admin');
 app.use('/', mainRoutes);
-app.use('/aramex', aramexRoutes);
+app.use('/aramex', aramexRoutes)
 app.use('/saee', saeeRoutes);
 app.use('/admin', adminRoutes);
 /********************************************************************************* */

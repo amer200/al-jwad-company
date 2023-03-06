@@ -87,119 +87,43 @@ exports.newSaeeOrder = (req, res) => {
         })
 }
 exports.aramexApi = async (req, res) => {
-    clientInfo = new aramex.ClientInfo();
-    aramex.Aramex.setClientInfo(clientInfo);
+    const sh_PersonName = req.body.p_name;
+    const sh_CompanyName = 'Gotex';
+    const sh_EmailAddress = 'support@go-tex.net';
+    const sh_PhoneNumber1 = req.body.p_mobile;
+    const sh_Line1 = req.body.p_streetaddress;
+    const sh_City = req.body.c_city;
+    const sh_CountryCode = 'SAU';
+    /*********************************** */
+    const c_PersonName = req.body.c_name;
+    const c_PhoneNumber1 = req.body.c_mobile;
+    const c_Line1 = req.body.c_streetaddress;
+    const c_City = req.body.c_city;
+    const c_CountryCode = 'SAU';
+    const clientInfo = new aramex.ClientInfo();
+    // aramex.Aramex.setClientInfo(clientInfo);
 
-    aramex.Aramex.setConsignee(new aramex.Consignee({
-        "Reference1": "",
-        "Reference2": "",
-        "AccountNumber": "",
-        "PartyAddress": {
-            "Line1": "1, bhat ji ki badi",
-            "Line2": "",
-            "Line3": "",
-            "City": "Dubai",
-            "StateOrProvinceCode": "",
-            "PostCode": "",
-            "CountryCode": "AE",
-            "Longitude": 0,
-            "Latitude": 0,
-            "BuildingNumber": "",
-            "BuildingName": "",
-            "Floor": "",
-            "Apartment": "",
-            "POBox": null,
-            "Description": ""
-        },
-        "Contact": {
-            "Department": "",
-            "PersonName": "Viki",
-            "Title": "",
-            "CompanyName": "hgh pvt ltd",
-            "PhoneNumber1": "8454097313",
-            "PhoneNumber1Ext": "",
-            "PhoneNumber2": "",
-            "PhoneNumber2Ext": "",
-            "FaxNumber": "",
-            "CellPhone": "8454097313",
-            "EmailAddress": "vi@gmail.com",
-            "Type": ""
-        }
-    }));
+    aramex.Aramex.setConsignee(new aramex.Consignee(
+        PersonName = sh_PersonName,
+        CompanyName = sh_CompanyName,
+        EmailAddress = sh_EmailAddress,
+        PhoneNumber1 = sh_PhoneNumber1,
+        Line1 = sh_Line1,
+        City = sh_City,
+        CountryCode = sh_CountryCode));
 
-    aramex.Aramex.setShipper(new aramex.Shipper({
-        "Reference1": "",
-        "Reference2": "",
-        "AccountNumber": "60531487",
-        "PartyAddress": {
-            "Line1": "dwayne streey 123, jhsg",
-            "Line2": "",
-            "Line3": "",
-            "City": "Makkah",
-            "StateOrProvinceCode": "",
-            "PostCode": "24211",
-            "CountryCode": "SAU",
-            "Longitude": 0,
-            "Latitude": 0,
-            "BuildingNumber": null,
-            "BuildingName": null,
-            "Floor": null,
-            "Apartment": null,
-            "POBox": null,
-            "Description": null
-        },
-        Contact: {
-            "Department": "",
-            "PersonName": "Amer Mostafa",
-            "Title": "",
-            "CompanyName": "jha pvt",
-            "PhoneNumber1": "+201152306375",
-            "PhoneNumber1Ext": "",
-            "PhoneNumber2": "",
-            "PhoneNumber2Ext": "",
-            "FaxNumber": "",
-            "CellPhone": "25655666",
-            "EmailAddress": "amermostaafa@gmail.com",
-            "Type": ""
-        }
-    }));
+    aramex.Aramex.setShipper(new aramex.Shipper(
+        PersonName = c_PersonName,
+        CompanyName = null,
+        EmailAddress = null,
+        PhoneNumber1 = c_PhoneNumber1,
+        PhoneNumber1Ext = null,
+        CellPhone = null,
+        Line1 = c_streetaddress,
+        CountryCode = 'SAU',
+        City = c_City));
 
-    aramex.Aramex.setThirdParty(new aramex.ThirdParty({
-        "Reference1": "",
-        "Reference2": "",
-        "AccountNumber": "",
-        "PartyAddress": {
-            "Line1": "",
-            "Line2": "",
-            "Line3": "",
-            "City": "",
-            "StateOrProvinceCode": "",
-            "PostCode": "",
-            "CountryCode": "",
-            "Longitude": 0,
-            "Latitude": 0,
-            "BuildingNumber": null,
-            "BuildingName": null,
-            "Floor": null,
-            "Apartment": null,
-            "POBox": null,
-            "Description": null
-        },
-        "Contact": {
-            "Department": "",
-            "PersonName": "Amer",
-            "Title": "",
-            "CompanyName": "",
-            "PhoneNumber1": "",
-            "PhoneNumber1Ext": "",
-            "PhoneNumber2": "",
-            "PhoneNumber2Ext": "",
-            "FaxNumber": "",
-            "CellPhone": "",
-            "EmailAddress": "",
-            "Type": ""
-        }
-    }));
+    aramex.Aramex.setThirdParty(new aramex.ThirdParty());
 
     aramex.Aramex.setDetails(1);
 
@@ -209,7 +133,5 @@ exports.aramexApi = async (req, res) => {
 
     //Creating shipment
 
-    let result = await aramex.Aramex.createShipment([{ PackageType: 'Box', Quantity: 2, Weight: { Value: 0.5, Unit: 'Kg' }, Comments: 'Docs', Reference: '' }]);
-    res.json(result)
-    //tracking shipment let result = await aramex.Aramex.track(['3915342793', '3915342826']);
+    let result = await aramex.Aramex.createShipment([{ PackageType: 'Box', Quantity: +quantity, Weight: { Value: +weight, Unit: 'Kg' }, Comments: null, Reference: null }]);
 }

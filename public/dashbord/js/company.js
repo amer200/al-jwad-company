@@ -1,19 +1,20 @@
-const submitOrder = () => {
-    const p_name = document.getElementById('p_name');
-    const p_mobile = document.getElementById('p_mobile');
-    const p_streetaddress = document.getElementById('p_streetaddress');
-    const p_city = document.getElementById('p_city');
-    const weight = document.getElementById('weight');
-    const quantity = document.getElementById('quantity');
-    const cashondelivery = document.getElementById('cashondelivery');
+const submitOrder = (url, co) => {
+    const p_name = document.querySelector(`#${co} #p_name`);
+    const p_mobile = document.querySelector(`#${co} #p_mobile`)
+    const p_streetaddress = document.querySelector(`#${co} #p_streetaddress`);
+    const p_city = document.querySelector(`#${co} #p_city`);
+    const weight = document.querySelector(`#${co} #weight`);
+    const quantity = document.querySelector(`#${co} #quantity`)
+    const cashondelivery = document.querySelector(`#${co} #cashondelivery`)
     if (cashondelivery.checked) {
         cashondelivery.value = 1;
     }
     /*************************** */
-    const c_name = document.getElementById('c_name');
-    const c_mobile = document.getElementById('c_mobile');
-    const c_streetaddress = document.getElementById('c_streetaddress');
-    const c_city = document.getElementById('c_city');
+    const c_name = document.querySelector(`#${co} #c_name`)
+    const c_mobile = document.querySelector(`#${co} #c_mobile`)
+    const c_streetaddress = document.querySelector(`#${co} #c_streetaddress`)
+    const c_city = document.querySelector(`#${co} #c_city`)
+    /*********************** */
     if (!p_name.value) {
         console.log("pname")
         return p_name.classList.add('err-border');
@@ -63,7 +64,7 @@ const submitOrder = () => {
         c_mobile: c_mobile.value
 
     }
-    fetch('/saee/add-new-order', {
+    fetch(url, {
         method: "post",
         headers: {
             'Accept': 'application/json',
@@ -87,4 +88,15 @@ function onlyNumberKey(evt) {
     if (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57))
         return false;
     return true;
+}
+
+const validateInputs = (co) => {
+    const inputs = document.getElementById(co).getElementsByTagName('input');
+    inputs.forEach(i => {
+        if (!i.value) {
+            alert('يجب مليء كل الحقول')
+            return false
+        }
+    });
+    return true
 }
