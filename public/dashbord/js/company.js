@@ -74,11 +74,10 @@ const submitOrder = (url, co) => {
         body: JSON.stringify(data)
     })
         .then(response => {
-            return response.json()
-        })
-        .then(response => {
-            if(response.status == 200){
+            if (response.status == 200) {
                 alert("تم اضافة الشحنة")
+            } else {
+                alert('خطاء !!')
             }
         })
         .catch(err => {
