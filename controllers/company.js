@@ -88,7 +88,16 @@ exports.newSaeeOrder = (req, res) => {
 }
 exports.aramexApi = async (req, res) => {
     try {
-        clientInfo = new aramex.ClientInfo();
+        clientInfo = new aramex.ClientInfo({
+            "User Name": "testingapi@aramex.com",
+            "Password ": "R12345678$r",
+            "Version": "v1",
+            "Account Entity": "LON",
+            "Account Number": "102331",
+            "Account PIN": "321321",
+            "Account Country Code": "GB",
+            "Source": ""
+        });
 
         aramex.Aramex.setClientInfo(clientInfo);
 
@@ -159,6 +168,9 @@ exports.aramexApi = async (req, res) => {
         aramex.Aramex.setWeight();
         let result = await aramex.Aramex.createShipment([{ PackageType: 'Box', Quantity: 2, Weight: { Value: 0.5, Unit: 'Kg' }, Comments: 'Docs', Reference: '' }]);
         console.log(result);
+        res.json({
+            result: result
+        })
     } catch (err) {
         console.log(err)
     }
