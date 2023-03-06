@@ -1,5 +1,6 @@
 const Company = require('../models/company');
 const Pacorder = require('../models/pacorder');
+const aramex = require('aramex-api');
 const axios = require('axios');
 exports.changeStatus = async (req, res) => {
     const id = req.params.id;
@@ -84,4 +85,27 @@ exports.newSaeeOrder = (req, res) => {
         .catch(err => {
             console.log(err)
         })
+}
+exports.aramexApi = async (req, res) => {
+    try {
+        clientInfo = new aramex.ClientInfo();
+
+        aramex.Aramex.setClientInfo(clientInfo);
+
+        aramex.Aramex.setConsignee(new aramex.Consignee());
+
+        aramex.Aramex.setShipper(new aramex.Shipper());
+
+        // aramex.Aramex.setThirdParty(new aramex.ThirdParty());
+
+        aramex.Aramex.setDetails(1);
+
+        aramex.Aramex.setDimension();
+
+        aramex.Aramex.setWeight();
+        let result = await aramex.Aramex.createShipment([{ PackageType: 'Box', Quantity: 2, Weight: { Value: 0.5, Unit: 'Kg' }, Comments: 'Docs', Reference: '' }]);
+        console.log(result);
+    } catch (err) {
+        console.log(err)
+    }
 }
