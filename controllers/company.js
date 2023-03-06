@@ -87,52 +87,56 @@ exports.newSaeeOrder = (req, res) => {
         })
 }
 exports.aramexApi = async (req, res) => {
-    const sh_PersonName = req.body.p_name;
-    const sh_CompanyName = 'Gotex';
-    const sh_EmailAddress = 'support@go-tex.net';
-    const sh_PhoneNumber1 = req.body.p_mobile;
-    const sh_Line1 = req.body.p_streetaddress;
-    const sh_City = req.body.c_city;
-    const sh_CountryCode = 'SAU';
-    /*********************************** */
-    const c_PersonName = req.body.c_name;
-    const c_PhoneNumber1 = req.body.c_mobile;
-    const c_Line1 = req.body.c_streetaddress;
-    const c_City = req.body.c_city;
-    const c_CountryCode = 'SAU';
-    const clientInfo = new aramex.ClientInfo();
-    // aramex.Aramex.setClientInfo(clientInfo);
+    try {
+        const sh_PersonName = req.body.p_name;
+        const sh_CompanyName = 'Gotex';
+        const sh_EmailAddress = 'support@go-tex.net';
+        const sh_PhoneNumber1 = req.body.p_mobile;
+        const sh_Line1 = req.body.p_streetaddress;
+        const sh_City = req.body.c_city;
+        const sh_CountryCode = 'SAU';
+        /*********************************** */
+        const c_PersonName = req.body.c_name;
+        const c_PhoneNumber1 = req.body.c_mobile;
+        const c_Line1 = req.body.c_streetaddress;
+        const c_City = req.body.c_city;
+        const c_CountryCode = 'SAU';
+        const clientInfo = new aramex.ClientInfo();
+        // aramex.Aramex.setClientInfo(clientInfo);
 
-    aramex.Aramex.setConsignee(new aramex.Consignee(
-        PersonName = sh_PersonName,
-        CompanyName = sh_CompanyName,
-        EmailAddress = sh_EmailAddress,
-        PhoneNumber1 = sh_PhoneNumber1,
-        Line1 = sh_Line1,
-        City = sh_City,
-        CountryCode = sh_CountryCode));
+        aramex.Aramex.setConsignee(new aramex.Consignee(
+            PersonName = sh_PersonName,
+            CompanyName = sh_CompanyName,
+            EmailAddress = sh_EmailAddress,
+            PhoneNumber1 = sh_PhoneNumber1,
+            Line1 = sh_Line1,
+            City = sh_City,
+            CountryCode = sh_CountryCode));
 
-    aramex.Aramex.setShipper(new aramex.Shipper(
-        PersonName = c_PersonName,
-        CompanyName = null,
-        EmailAddress = null,
-        PhoneNumber1 = c_PhoneNumber1,
-        PhoneNumber1Ext = null,
-        CellPhone = null,
-        Line1 = c_streetaddress,
-        CountryCode = 'SAU',
-        City = c_City));
+        aramex.Aramex.setShipper(new aramex.Shipper(
+            PersonName = c_PersonName,
+            CompanyName = null,
+            EmailAddress = null,
+            PhoneNumber1 = c_PhoneNumber1,
+            PhoneNumber1Ext = null,
+            CellPhone = null,
+            Line1 = c_Line1,
+            CountryCode = 'SAU',
+            City = c_City));
 
-    aramex.Aramex.setThirdParty(new aramex.ThirdParty());
+        aramex.Aramex.setThirdParty(new aramex.ThirdParty());
 
-    aramex.Aramex.setDetails(1);
+        aramex.Aramex.setDetails(1);
 
-    aramex.Aramex.setDimension();
+        aramex.Aramex.setDimension();
 
-    aramex.Aramex.setWeight();
+        aramex.Aramex.setWeight();
 
-    //Creating shipment
+        //Creating shipment
 
-    let result = await aramex.Aramex.createShipment([{ PackageType: 'Box', Quantity: +quantity, Weight: { Value: +weight, Unit: 'Kg' }, Comments: null, Reference: null }]);
-    res.json(result)
+        let result = await aramex.Aramex.createShipment([{ PackageType: 'Box', Quantity: +quantity, Weight: { Value: +weight, Unit: 'Kg' }, Comments: null, Reference: null }]);
+        res.json(result)
+    } catch (err) {
+        console.log(err)
+    }
 }
