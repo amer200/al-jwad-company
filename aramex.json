@@ -1,0 +1,232 @@
+{
+    "ClientInfo": {
+        "UserName": "test.api@aramex.com",
+        "Password": "Aramex@12345",
+        "Version": "v1.0",
+        "AccountNumber": "60531487",
+        "AccountPin": "654654",
+        "AccountEntity": "BOM",
+        "AccountCountryCode": "IN",
+        "Source": 24
+    },
+     "LabelInfo": {
+        "ReportID": 9729,
+        "ReportType": "URL"
+    },
+    "Shipments": [
+        {
+            "Reference1": "",
+            "Reference2": "",
+            "Reference3": "",
+            "Shipper": {
+                "Reference1": "",
+                "Reference2": "",
+                "AccountNumber": "60531487",
+                "PartyAddress": {
+                    "Line1": "dwayne streey 123, jhsg",
+                    "Line2": "",
+                    "Line3": "",
+                    "City": "Mumbai",
+                    "StateOrProvinceCode": "",
+                    "PostCode": "400093",
+                    "CountryCode": "IN",
+                    "Longitude": 0,
+                    "Latitude": 0,
+                    "BuildingNumber": null,
+                    "BuildingName": null,
+                    "Floor": null,
+                    "Apartment": null,
+                    "POBox": null,
+                    "Description": null
+                },
+                "Contact": {
+                    "Department": "",
+                    "PersonName": "Dosan",
+                    "Title": "",
+                    "CompanyName": "jha pvt",
+                    "PhoneNumber1": "25655666",
+                    "PhoneNumber1Ext": "",
+                    "PhoneNumber2": "",
+                    "PhoneNumber2Ext": "",
+                    "FaxNumber": "",
+                    "CellPhone": "25655666",
+                    "EmailAddress": "dosan@gmail.com",
+                    "Type": ""
+                }
+            },
+            "Consignee": {
+                "Reference1": "",
+                "Reference2": "",
+                "AccountNumber": "",
+                "PartyAddress": {
+                    "Line1": "1, bhat ji ki badi",
+                    "Line2": "",
+                    "Line3": "",
+                    "City": "Dubai",
+                    "StateOrProvinceCode": "",
+                    "PostCode": "",
+                    "CountryCode": "AE",
+                    "Longitude": 0,
+                    "Latitude": 0,
+                    "BuildingNumber": "",
+                    "BuildingName": "",
+                    "Floor": "",
+                    "Apartment": "",
+                    "POBox": null,
+                    "Description": ""
+                },
+                "Contact": {
+                    "Department": "",
+                    "PersonName": "Viki",
+                    "Title": "",
+                    "CompanyName": "hgh pvt ltd",
+                    "PhoneNumber1": "8454097313",
+                    "PhoneNumber1Ext": "",
+                    "PhoneNumber2": "",
+                    "PhoneNumber2Ext": "",
+                    "FaxNumber": "",
+                    "CellPhone": "8454097313",
+                    "EmailAddress": "vi@gmail.com",
+                    "Type": ""
+                }
+            },
+            "ThirdParty": {
+                "Reference1": "",
+                "Reference2": "",
+                "AccountNumber": "",
+                "PartyAddress": {
+                    "Line1": "",
+                    "Line2": "",
+                    "Line3": "",
+                    "City": "",
+                    "StateOrProvinceCode": "",
+                    "PostCode": "",
+                    "CountryCode": "",
+                    "Longitude": 0,
+                    "Latitude": 0,
+                    "BuildingNumber": null,
+                    "BuildingName": null,
+                    "Floor": null,
+                    "Apartment": null,
+                    "POBox": null,
+                    "Description": null
+                },
+                "Contact": {
+                    "Department": "",
+                    "PersonName": "",
+                    "Title": "",
+                    "CompanyName": "",
+                    "PhoneNumber1": "",
+                    "PhoneNumber1Ext": "",
+                    "PhoneNumber2": "",
+                    "PhoneNumber2Ext": "",
+                    "FaxNumber": "",
+                    "CellPhone": "",
+                    "EmailAddress": "",
+                    "Type": ""
+                }
+            },
+            "ShippingDateTime": "\/Date(1644325822000+0530)\/",
+            "DueDate": "\/Date(1644325822000+0530)\/",
+            "Comments": "",
+            "PickupLocation": "",
+            "OperationsInstructions": "",
+            "AccountingInstrcutions": "",
+            "Details": {
+                "Dimensions": null,
+                "ActualWeight": {
+                    "Unit": "KG",
+                    "Value": 2.0
+                },
+                "ChargeableWeight": null,
+                "DescriptionOfGoods": "Books",
+                "GoodsOriginCountry": "IN",
+                "NumberOfPieces": 1,
+                "ProductGroup": "EXP",
+                "ProductType": "PPX",
+                "PaymentType": "P",
+                "PaymentOptions": "",
+                "CustomsValueAmount": {
+                    "CurrencyCode": "USD",
+                    "Value": 200
+                },
+                "CashOnDeliveryAmount": null,
+                "InsuranceAmount": null,
+                "CashAdditionalAmount": null,
+                "CashAdditionalAmountDescription": "",
+                "CollectAmount": null,
+                "Services": "",
+                "Items": [
+                    {
+                        "PackageType": "Box",
+                        "Quantity": "1",
+                        "Weight": null,
+                        "CustomsValue": {
+                            "CurrencyCode": "USD",
+                            "Value": 10
+                        },
+                        "Comments": "Ravishing Gold Facial Kit Long Lasting Shining Appearance For All Skin Type 125g",
+                        "GoodsDescription": "new Gold Facial Kit Long  Shining Appearance",
+                        "Reference": "",
+                        "CommodityCode": "98765432"
+                    }
+                ],
+                "AdditionalProperties": [
+                    {
+                        "CategoryName": "CustomsClearance",
+                        "Name": "ShipperTaxIdVATEINNumber",
+                        "Value": "123456789101"
+                    },
+                    {
+                        "CategoryName": "CustomsClearance",
+                        "Name": "ConsigneeTaxIdVATEINNumber",
+                        "Value": "987654321012"
+                    },
+                    {
+                        "CategoryName": "CustomsClearance",
+                        "Name": "TaxPaid",
+                        "Value": "1"
+                    },
+                    {
+                        "CategoryName": "CustomsClearance",
+                        "Name": "InvoiceDate",
+                        "Value": "08/17/2020"
+                    },
+                    {
+                        "CategoryName": "CustomsClearance",
+                        "Name": "InvoiceNumber",
+                        "Value": "Inv123456"
+                    },
+                    {
+                        "CategoryName": "CustomsClearance",
+                        "Name": "TaxAmount",
+                        "Value": "120.52"
+                    },
+                    {
+                        "CategoryName": "CustomsClearance",
+                        "Name": "IOSS",
+                        "Value": "1098494352"
+                    },
+                    {
+                        "CategoryName": "CustomsClearance",
+                        "Name": "ExporterType",
+                        "Value": "UT"
+                    }
+                ]
+            },
+            "Attachments": [],
+            "ForeignHAWB": "",
+            "TransportType ": 0,
+            "PickupGUID": "",
+            "Number": null,
+            "ScheduledDelivery": null
+        }
+    ],
+    "Transaction": {
+        "Reference1": "",
+        "Reference2": "",
+        "Reference3": "",
+        "Reference4": "",
+        "Reference5": ""
+    }
+}
