@@ -95,6 +95,8 @@ exports.aramexApi = async (req, res) => {
         const sh_Line1 = req.body.p_streetaddress;
         const sh_City = req.body.c_city;
         const sh_CountryCode = 'SAU';
+        const weight = req.body.weight;
+        const quantity = req.body.quantity;
         /*********************************** */
         const c_PersonName = req.body.c_name;
         const c_PhoneNumber1 = req.body.c_mobile;
