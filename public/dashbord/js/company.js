@@ -1,3 +1,4 @@
+
 const submitOrder = (url, co) => {
     const p_name = document.querySelector(`#${co} #p_name`);
     const p_mobile = document.querySelector(`#${co} #p_mobile`)
@@ -72,6 +73,9 @@ const submitOrder = (url, co) => {
         },
         body: JSON.stringify(data)
     })
+        .then(response => {
+            return response.json()
+        })
         .then(response => {
             console.log(response)
         })
