@@ -148,7 +148,7 @@ exports.aramexApi = async (req, res) => {
             "POBox": null,
             "Description": null
         },
-        "Contact": {
+        Contact: {
             "Department": "",
             "PersonName": "Amer Mostafa",
             "Title": "",
@@ -159,7 +159,7 @@ exports.aramexApi = async (req, res) => {
             "PhoneNumber2Ext": "",
             "FaxNumber": "",
             "CellPhone": "25655666",
-            "EmailAddress": "amermostaafa@gmai;.com",
+            "EmailAddress": "amermostaafa@gmail.com",
             "Type": ""
         }
     }));
