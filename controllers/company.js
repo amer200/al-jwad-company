@@ -158,7 +158,7 @@ exports.aramexApi = async (req, res) => {
 
         aramex.Aramex.setWeight();
         let result = await aramex.Aramex.createShipment([{ PackageType: 'Box', Quantity: 2, Weight: { Value: 0.5, Unit: 'Kg' }, Comments: 'Docs', Reference: '' }]);
-        // console.log(result);
+        console.log(result);
     } catch (err) {
         console.log(err)
     }
