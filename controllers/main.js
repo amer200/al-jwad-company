@@ -8,6 +8,7 @@ const salt = bcrypt.genSaltSync(10);
 const nodemailer = require('nodemailer');
 const company = require('../models/company');
 const store = require('../models/store');
+const axios = require('axios');
 const telr = require("telr-nodejs")(process.env.TELR_AUTH, process.env.TELR_ID, {
     isTest: 1,
     currency: "SAR"
@@ -349,5 +350,21 @@ exports.postResetPass = (req, res) => {
         })
         .catch(err => {
             console.log(err);
+        })
+}
+/*********************** */
+exports.getCities = (req, res) => {
+    axios({
+        method: 'get',
+        url: `https://corporate.k-w-h.com/deliveryrequest/getallcities`,
+        data: {
+            secret: process.env.SAEE_KEY
+        }
+    })
+        .then(response => {
+            console.log(response.data)
+        })
+        .catch(err => {
+            console.log(err)
         })
 }

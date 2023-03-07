@@ -83,8 +83,11 @@ const submitOrder = (url, co) => {
             return response.json()
         })
         .then(data => {
+            if (data.msg == "تم اضافة الشحنة ") {
+                alert(data.msg)
+                location.reload();
+            }
             alert(data.msg)
-            location.reload();
         })
         .catch(err => {
             console.log(err)
@@ -112,3 +115,4 @@ const validateInputs = (co) => {
     });
     return true
 }
+/********************** */

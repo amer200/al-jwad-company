@@ -21,4 +21,5 @@ routes.get('/forget-password', mainController.getforgetPass);
 routes.post('/forget-password', mainController.postForgetPassword);
 routes.get('/reset-store-pass/:code', mainController.getResetPass);
 routes.post('/reset-store-pass/:code', mainController.postResetPass);
+routes.get('/cities', mainController.getCities);
 module.exports = routes
