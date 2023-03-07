@@ -2,19 +2,57 @@
     <h3>قائمة شركات الشحن</h3>
     <ul class="list-group companys">
         <li class="list-group-item" style="background-color: #18222E;">
-            <div class="row">
-                <div class="col-2">ساعي</div>
-                <div class="col-4">
-                    <img src="/imgs/shipp/saee-logo.png" alt="saee">
-                </div>
-                <div class="col-6">
-                    <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                        <%if(saee.status){%>
-                            <button type="button" class="btn btn-danger">تعطيل</button>
-                            <%}else{%>
-                                <button type="button" class="btn btn-danger">تنشيط</button>
-                                <%}%>
-                                    <button type="button" class="btn btn-warning">تعديل الاسعار</button>
+            <div class="container">
+                <div class="row" dir="ltr">
+                    <div class="col-md-4">
+                        <img src="/imgs/shipp/saee-logo.png" alt="saee">
+                    </div>
+                    <div class="col-md-7" style="    position: relative;
+                    right: -45px;
+                    top: -10px;">
+                        <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                            <%if(saee.status){%>
+                                <button type="button" class="btn btn-danger"
+                                    onclick="changeSaeeStutus('سيتم الغاء تنشيط ساعي')">تعطيل</button>
+                                <%}else{%>
+                                    <button type="button" class="btn btn-danger"
+                                        onclick="changeSaeeStutus('سيتم تنشيط ساعي')">تنشيط</button>
+                                    <%}%>
+                                        <button type="button" class="btn btn-warning" data-bs-toggle="modal"
+                                            data-bs-target="#saeeModal">تعديل الاسعار</button>
+                                        <div class="modal fade" id="saeeModal" tabindex="-1"
+                                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form action="/admin/edit-saee-prices" method="post">
+                                                            <div class="mb-3">
+                                                                <label for="price" class="form-label">سعر الشحنة</label>
+                                                                <input type="number" class="form-control" name="price"
+                                                                    value="<%=saee.price%>" required>
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label for="price" class="form-label">السعر لكل كجم فوق
+                                                                    ال15</label>
+                                                                <input type="number" class="form-control" name="kgprice"
+                                                                    value="<%=saee.kgprice%>" required>
+                                                            </div>
+                                                            <button type="submit" class="btn btn-primary">حفظ</button>
+                                                        </form>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-bs-dismiss="modal">Close</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                        </div>
                     </div>
                 </div>
             </div>

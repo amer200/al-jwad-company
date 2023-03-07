@@ -23,72 +23,72 @@ exports.changeStatus = async (req, res) => {
             console.log(err)
         })
 }
-exports.newSaeeOrder = (req, res) => {
-    const p_name = req.body.p_name;
-    const p_city = req.body.p_city;
-    const p_mobile = req.body.p_mobile;
-    const p_streetaddress = req.body.p_streetaddress;
-    const cashondelivery = req.body.cashondelivery;
-    const weight = req.body.weight;
-    const quantity = req.body.quantity;
-    const c_name = req.body.c_name;
-    const c_city = req.body.c_city;
-    const c_streetaddress = req.body.c_streetaddress;
-    const c_mobile = req.body.c_mobile;
-    console.log(req.body.declared_value);
-    axios({
-        method: 'post',
-        url: 'https://www.k-w-h.com/deliveryrequest/new',
-        data: {
-            secret: process.env.SAEE_KEY,
-            name: req.body.p_name,
-            city: req.body.p_city,
-            mobile: +req.body.p_mobile,
-            streetaddress: req.body.p_streetaddress,
-            cashondelivery: req.body.cashondelivery,
-            weight: +req.body.weight,
-            quantity: +req.body.quantity,
-            c_name: req.body.c_name,
-            c_city: req.body.c_city,
-            c_streetaddress: req.body.c_streetaddress,
-            c_mobile: +req.body.c_mobile,
-            declared_value: +req.body.declared_value
-        }
-    })
-        .then(response => {
-            if (response.data.success) {
-                const newPacorder = new Pacorder({
-                    company: "saee",
-                    name: c_name,
-                    store: req.session.store._id,
-                    details: {
-                        waybill: response.data.waybill
-                    }
-                })
-                newPacorder.save()
-                    .then(o => {
-                        Store.findById(req.session.store._id)
-                            .then(s => {
-                                s.pacorder.push(o._id)
-                                return s.save()
-                            })
-                            .then(s => {
-                                res.status(200).json({
-                                    msg: "تم اضافة الشحنة ",
-                                })
-                            })
-                    })
-            } else {
-                console.log(response.data)
-                res.status(403).json({
-                    msg: response.data.error
-                })
-            }
-        })
-        .catch(err => {
-            console.log(err)
-        })
-}
+// exports.newSaeeOrder = (req, res) => {
+//     const p_name = req.body.p_name;
+//     const p_city = req.body.p_city;
+//     const p_mobile = req.body.p_mobile;
+//     const p_streetaddress = req.body.p_streetaddress;
+//     const cashondelivery = req.body.cashondelivery;
+//     const weight = req.body.weight;
+//     const quantity = req.body.quantity;
+//     const c_name = req.body.c_name;
+//     const c_city = req.body.c_city;
+//     const c_streetaddress = req.body.c_streetaddress;
+//     const c_mobile = req.body.c_mobile;
+//     console.log(req.body.declared_value);
+//     axios({
+//         method: 'post',
+//         url: 'https://www.k-w-h.com/deliveryrequest/new',
+//         data: {
+//             secret: process.env.SAEE_KEY,
+//             name: req.body.p_name,
+//             city: req.body.p_city,
+//             mobile: +req.body.p_mobile,
+//             streetaddress: req.body.p_streetaddress,
+//             cashondelivery: req.body.cashondelivery,
+//             weight: +req.body.weight,
+//             quantity: +req.body.quantity,
+//             c_name: req.body.c_name,
+//             c_city: req.body.c_city,
+//             c_streetaddress: req.body.c_streetaddress,
+//             c_mobile: +req.body.c_mobile,
+//             declared_value: +req.body.declared_value
+//         }
+//     })
+//         .then(response => {
+//             if (response.data.success) {
+//                 const newPacorder = new Pacorder({
+//                     company: "saee",
+//                     name: c_name,
+//                     store: req.session.store._id,
+//                     details: {
+//                         waybill: response.data.waybill
+//                     }
+//                 })
+//                 newPacorder.save()
+//                     .then(o => {
+//                         Store.findById(req.session.store._id)
+//                             .then(s => {
+//                                 s.pacorder.push(o._id)
+//                                 return s.save()
+//                             })
+//                             .then(s => {
+//                                 res.status(200).json({
+//                                     msg: "تم اضافة الشحنة ",
+//                                 })
+//                             })
+//                     })
+//             } else {
+//                 console.log(response.data)
+//                 res.status(403).json({
+//                     msg: response.data.error
+//                 })
+//             }
+//         })
+//         .catch(err => {
+//             console.log(err)
+//         })
+// }
 exports.getSaeeSticker = (req, res) => {
     const orderId = req.params.id;
     const waybill = req.params.waybill;

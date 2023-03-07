@@ -27,17 +27,14 @@ const removeStore = (id, name) => {
   }
 }
 /*companies */
-const changeCompanyStutus = (id) => {
-  const myInput = document.getElementById('co' + id);
-  let Txt1 = 'سيتم الغاء تفعيل الشركة ولن تظهر للمتاجر!';
-  if (myInput.checked) {
-    Txt1 = 'سيتم تفعيل الشركة للمتاجر'
-  }
-  if (confirm(Txt1)) {
-    fetch(`/admin/change-company-status/${id}`)
+const changeSaeeStutus = (t) => {
+  if (confirm(t)) {
+    fetch(`/admin/change-saee-status`)
       .then(response => {
         if (!response.status == 200) {
           alert('خطاء حاول ثانية')
+        } else {
+          location.reload();
         }
       })
       .catch(err => {

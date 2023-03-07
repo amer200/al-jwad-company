@@ -4,6 +4,7 @@ const Client = require('../models/client');
 const Order = require('../models/order');
 const bcrypt = require('bcryptjs');
 const ejs = require('ejs');
+const saee = require('../models/saee');
 const nodemailer = require('nodemailer');
 /* nodemailer config */
 const transport = nodemailer.createTransport({
@@ -59,6 +60,42 @@ exports.sendStoreEmail = (req, res) => {
         })
         .then(resu => {
             res.redirect('/admin')
+        })
+        .catch(err => {
+            console.log(err)
+        })
+}
+exports.changeSaeeStatus = (req, res) => {
+    saee.findOne()
+        .then(c => {
+            console.log(c)
+            if (c.status) {
+                c.status = false;
+            } else {
+                c.status = true;
+            }
+            return c.save()
+        })
+        .then(c => {
+            res.status(200).json({
+                msg: `تم تعديل حالة شركة`
+            })
+        })
+        .catch(err => {
+            console.log(err)
+        })
+}
+exports.editSaeePrice = (req, res) => {
+    const price = req.body.price;
+    const kgprice = req.body.kgprice;
+    Saee.findOne()
+        .then(s => {
+            s.price = price;
+            s.kgprice = kgprice;
+            return s.save();
+        })
+        .then(s => {
+            res.redirect('/admin');
         })
         .catch(err => {
             console.log(err)
