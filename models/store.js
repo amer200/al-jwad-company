@@ -9,7 +9,6 @@ const storeSchema = mongoose.Schema({
     location: String,
     clients: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Client' }],
     orders: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Order' }],
-    pacorder: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Pacorder' }],
     wallet: Number,
     code: String
 })

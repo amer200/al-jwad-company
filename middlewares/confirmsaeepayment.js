@@ -13,7 +13,8 @@ exports.isConfirm = async (req, res, next) => {
                             next()
                         })
                 } else {
-                    res.status(304).json({
+                    console.log("m1")
+                    res.status(200).json({
                         msg: "الرصيد لا يكفي !!"
                     })
                 }
@@ -25,11 +26,15 @@ exports.isConfirm = async (req, res, next) => {
                             next()
                         })
                 } else {
-                    res.status(304).json({
+                    console.log("m")
+                    res.status(200).json({
                         msg: "الرصيد لا يكفي !!"
                     })
                 }
             }
+        })
+        .catch(err => {
+            console.log(err)
         })
 
 }

@@ -47,7 +47,7 @@ exports.postCreate = (req, res) => {
                 newOrder.save()
                     .then(o => {
                         res.status(200).json({
-                            "success": 'تم اضافة الشحنة بنجاح'
+                            msg: "تم اضافة الشحنة بنجاح"
                         })
                     })
             } else {

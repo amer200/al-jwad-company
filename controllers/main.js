@@ -25,11 +25,10 @@ const transport = nodemailer.createTransport({
 exports.getDash = async (req, res) => {
     const clients = await Client.find({ store: req.session.store._id });
     const Company = await company.find();
-    const Store = await Strore.findById(req.session.store._id).populate('pacorder');
+    // const Store = await Strore.findById(req.session.store._id).populate('pacorder');
     res.render('main/dashbord/index', {
         clients: clients,
         companys: Company,
-        pacorder: Store.pacorder,
         wallet: req.session.store.wallet
     })
 }
