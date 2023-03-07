@@ -1,0 +1,104 @@
+<%- include('./includes/head') -%>
+    <link rel="stylesheet" href="/dashbord/css/index.css">
+    <div id="wrapper" class="toggled">
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand"> <a href=""> logo </a> </li>
+                <li> <i class="fa-solid fa-sack-dollar"></i><button class="btn btn-success" data-bs-toggle="modal"
+                        data-bs-target="#wallet" style="background: none;
+                        border: none;">
+                        المحفظة(
+                        ر.س<%=wallet%>)</button></li>
+                <li> <img src="/imgs/costumer.png" style="width: 25px;
+                    height: 25px;
+                    margin-right: 15px;"><a href="#">العملاء</a> </li>
+                <li> <i class="fa-solid fa-cube"></i><a href="#" onclick="showBox('package-box')">الشحنات</a> </li>
+                <li> <i class="fa-solid fa-truck-fast"></i><a href="#" onclick="showBox('companies')">شركات الشحن</a>
+                </li>
+                <li style="margin-top: 160%;"> <i class="fa-solid fa-right-from-bracket"></i><a href="/logout">تسجيل
+                        الخروج</a> </li>
+            </ul>
+        </div> <!-- /#sidebar-wrapper -->
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container mt-4">
+                <div class="row">
+                    <div class="col-md-4">
+                        <h3>انشاء شحنة (شركة ساعي)</h3>
+                    </div>
+                    <div class="col-md-6"></div>
+                    <div class="col-md-12" action="/saee/create" method="post">
+                        <div class="row">
+                            <div class="col-6">
+                                <h3>بينات الشحنة</h3>
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">الاسم</label>
+                                    <input type="text" class="form-control" id="p_name" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">الجوال</label>
+                                    <input type="tel" class="form-control" id="p_mobile"
+                                        onkeypress="return onlyNumberKey(event)" pattern="[+]{1}[0-9]{11,14}" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">عنوان المستودع</label>
+                                    <input type="text" class="form-control" id="p_streetaddress" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">المدينة</label>
+                                    <input type="text" class="form-control" id="p_city" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">وزن الشحنة بالكجم</label>
+                                    <input type="text" class="form-control" id="weight"
+                                        onkeypress="return onlyNumberKey(event)" value="" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">الكمية</label>
+                                    <input type="text" class="form-control" id="quantity"
+                                        onkeypress="return onlyNumberKey(event)" value="" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">سعر الشحنة</label>
+                                    <input type="text" class="form-control" id="declared_value"
+                                        onkeypress="return onlyNumberKey(event)" value="" required>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="0" id="cashondelivery"
+                                        required>
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        الدفع عند الاستلام
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <h3>بينات المستلم</h3>
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">الاسم</label>
+                                    <input type="text" class="form-control" id="c_name" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">الجوال</label>
+                                    <input type="number" class="form-control" id="c_mobile"
+                                        pattern="[+]{1}[0-9]{11,14}" required>
+                                </div>
+                                <div class=" mb-3">
+                                    <label for="name" class="form-label">العنوان</label>
+                                    <input type="text" class="form-control" id="c_streetaddress" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">المدينة</label>
+                                    <input type="text" class="form-control" id="c_city" required>
+                                </div>
+                            </div>
+                            <button class="btn btn-success" type="button"
+                                style="width: 50%; margin-left: auto; margin-right: auto;" onclick="submitOrder()">حفظ</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- /#page-content-wrapper -->
+    </div> <!-- /#wrapper -->
+    <script src="/dashbord/js/saee.js"></script>
+    <%- include('./includes/footer') -%>

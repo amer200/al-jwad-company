@@ -1,21 +1,21 @@
 
-const submitOrder = (url, co) => {
-    const p_name = document.querySelector(`#${co} #p_name`);
-    const p_mobile = document.querySelector(`#${co} #p_mobile`)
-    const p_streetaddress = document.querySelector(`#${co} #p_streetaddress`);
-    const p_city = document.querySelector(`#${co} #p_city`);
-    const weight = document.querySelector(`#${co} #weight`);
-    const quantity = document.querySelector(`#${co} #quantity`)
-    const declared_value = document.querySelector(`#${co} #declared_value`);
-    const cashondelivery = document.querySelector(`#${co} #cashondelivery`);
+const submitOrder = () => {
+    const p_name = document.querySelector(`#p_name`);
+    const p_mobile = document.querySelector(`#p_mobile`)
+    const p_streetaddress = document.querySelector(`#p_streetaddress`);
+    const p_city = document.querySelector(`#p_city`);
+    const weight = document.querySelector(`#weight`);
+    const quantity = document.querySelector(`#quantity`)
+    const declared_value = document.querySelector(`#declared_value`);
+    const cashondelivery = document.querySelector(`#cashondelivery`);
     if (cashondelivery.checked) {
         cashondelivery.value = 1;
     }
     /*************************** */
-    const c_name = document.querySelector(`#${co} #c_name`)
-    const c_mobile = document.querySelector(`#${co} #c_mobile`)
-    const c_streetaddress = document.querySelector(`#${co} #c_streetaddress`)
-    const c_city = document.querySelector(`#${co} #c_city`)
+    const c_name = document.querySelector(`#c_name`)
+    const c_mobile = document.querySelector(`#c_mobile`)
+    const c_streetaddress = document.querySelector(`#c_streetaddress`)
+    const c_city = document.querySelector(`#c_city`)
     /*********************** */
     if (!p_name.value) {
         console.log("pname")
@@ -52,10 +52,6 @@ const submitOrder = (url, co) => {
         console.log("q")
         return quantity.classList.add('err-border');
     }
-    if (!declared_value.value) {
-        console.log('declared_value');
-        return declared_value.classList.add('err-border');
-    }
     const data = {
         p_name: p_name.value,
         p_city: p_city.value,
@@ -67,11 +63,9 @@ const submitOrder = (url, co) => {
         c_name: c_name.value,
         c_city: c_city.value,
         c_streetaddress: c_streetaddress.value,
-        c_mobile: c_mobile.value,
-        declared_value: declared_value.value
-
+        c_mobile: c_mobile.value
     }
-    fetch(url, {
+    fetch("/saee/create", {
         method: "post",
         headers: {
             'Accept': 'application/json',

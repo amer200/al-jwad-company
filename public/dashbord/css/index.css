@@ -1,0 +1,21 @@
+.card {
+    border: 1px solid rgb(90, 8, 8);
+    background-color: #18222E;
+    padding: 15px 40px;
+    color: #fff;
+    border-radius: 12px;
+    height: 85px;
+}
+
+.card .price {
+    text-align: center;
+}
+
+.snipimage {
+    height: 80px;
+    top: -15px;
+}
+
+.snipimage img {
+    height: 100%;
+}

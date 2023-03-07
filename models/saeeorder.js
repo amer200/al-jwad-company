@@ -2,10 +2,9 @@ const mongoose = require('mongoose');
 
 
 const orderSchema = mongoose.Schema({
-    company: String,
     store: { type: mongoose.Schema.Types.ObjectId, ref: 'Store' },
-    name: String,
-    details: Object
+    details: Object,
+    response: Object,
 })
 
-module.exports = mongoose.model('Pacorder', orderSchema);
+module.exports = mongoose.model('SaeeOrders', orderSchema);
