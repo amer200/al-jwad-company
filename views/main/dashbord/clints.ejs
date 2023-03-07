@@ -1,94 +1,100 @@
-<div class="row" id="clint-box">
-    <div class="col-6">
-        <h3>اضافة عميل جديد</h3>
-        <form action="/add-client" method="post">
-            <div class="mb-3">
-                <input type="text" class="form-control" name="name" placeholder="اسم العميل" required>
-            </div>
-            <div class="mb-3">
-                <input type="text" class="form-control" name="number" placeholder="رقم الجوال" required>
-            </div>
-
-            <div class="mb-3">
-                <input type="text" class="form-control" name="street" placeholder="العنوان اسم الشارع/ الحي" required>
-            </div>
-            <div class="mb-3">
-                <input type="text" class="form-control" name="location" placeholder="الموقع المدينة - المحافظة"
-                    required>
-            </div>
-            <div class="mb-3">
-                <textarea name="details" class="form-control" cols="30" rows="5"
-                    placeholder="المزيد من التفاصيل"></textarea>
-            </div>
-            <div class="mb-3">
-                <button type="submit" class="btn btn-dark"> حفظ</button>
-            </div>
-        </form>
-    </div>
-    <div class="col-6">
-        <h3>العملاء الحاليين</h3>
-        <div class="mb-3">
-            <input type="text" class="form-control" placeholder="بحث عن عميل بالاسم" onkeyup="sendSerch(this)">
-            <ul class=" list-group" id="searchResult">
-
-            </ul>
-        </div>
-        <ul class="list-group">
-            <% clients.forEach(c=> { %>
-                <li class="list-group-item">
-                    <%=c.name%>
-                        <div class="btn-group" role="group" aria-label="Basic example">
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                data-bs-target="#edit-clint-modal<%=c._id%>">عرض/تعديل</button>
-                            <button type="button" class="btn btn-danger"
-                                onclick="removeClient('<%= c._id%>', '<%= c.name%>')">حذف</button>
+<%- include("./includes/head") %>
+    <div id="wrapper" class="toggled">
+        <%- include("./includes/side-bar") %>
+            <div class="row" id="clint-box" style="width: 100%">
+                <div class="col-6">
+                    <h3>اضافة عميل جديد</h3>
+                    <form action="/add-client" method="post">
+                        <div class="mb-3">
+                            <input type="text" class="form-control" name="name" placeholder="اسم العميل" required>
                         </div>
-                </li>
-                <div class="modal fade" id="edit-clint-modal<%=c._id%>" tabindex="-1"
-                    aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">عرض/تعديل</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <form action="/edit-client/<%= c._id%> " method="post">
-                                    <div class="mb-3">
-                                        <input type="text" class="form-control" name="name" value="<%=c.name%>"
-                                            placeholder="اسم العميل">
-                                    </div>
-                                    <div class="mb-3">
-                                        <input type="text" class="form-control" name="number" value="<%=c.mobile%>"
-                                            placeholder="رقم الجوال">
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <input type="text" class="form-control" name="street" value="<%=c.address%>"
-                                            placeholder="العنوان اسم الشارع/ الحي">
-                                    </div>
-                                    <div class="mb-3">
-                                        <input type="text" class="form-control" name="location" value="<%=c.location%>"
-                                            placeholder="الموقع المدينة - المحافظة">
-                                    </div>
-                                    <div class="mb-3">
-                                        <textarea name="details" class="form-control" cols="30" rows="5"
-                                            placeholder="المزيد من التفاصيل"><%=c.details%></textarea>
-                                    </div>
-                                    <div class="mb-3">
-                                        <button type="submit" class="btn btn-dark"> حفظ</button>
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            </div>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" name="number" placeholder="رقم الجوال" required>
                         </div>
-                    </div>
+
+                        <div class="mb-3">
+                            <input type="text" class="form-control" name="street" placeholder="العنوان اسم الشارع/ الحي"
+                                required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" name="location"
+                                placeholder="الموقع المدينة - المحافظة" required>
+                        </div>
+                        <div class="mb-3">
+                            <textarea name="details" class="form-control" cols="30" rows="5"
+                                placeholder="المزيد من التفاصيل"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <button type="submit" class="btn btn-dark"> حفظ</button>
+                        </div>
+                    </form>
                 </div>
-                <% });%>
-        </ul>
-    </div>
-</div>
-<script src="/dashbord/js/clint.js"></script>
+                <div class="col-6">
+                    <h3>العملاء الحاليين</h3>
+                    <div class="mb-3">
+                        <input type="text" class="form-control" placeholder="بحث عن عميل بالاسم"
+                            onkeyup="sendSerch(this)">
+                        <ul class=" list-group" id="searchResult">
+
+                        </ul>
+                    </div>
+                    <ul class="list-group">
+                        <% clients.forEach(c=> { %>
+                            <li class="list-group-item">
+                                <%=c.name%>
+                                    <div class="btn-group" role="group" aria-label="Basic example">
+                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                            data-bs-target="#edit-clint-modal<%=c._id%>">عرض/تعديل</button>
+                                        <button type="button" class="btn btn-danger"
+                                            onclick="removeClient('<%= c._id%>', '<%= c.name%>')">حذف</button>
+                                    </div>
+                            </li>
+                            <div class="modal fade" id="edit-clint-modal<%=c._id%>" tabindex="-1"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">عرض/تعديل</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form action="/edit-client/<%= c._id%> " method="post">
+                                                <div class="mb-3">
+                                                    <input type="text" class="form-control" name="name"
+                                                        value="<%=c.name%>" placeholder="اسم العميل">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <input type="text" class="form-control" name="number"
+                                                        value="<%=c.mobile%>" placeholder="رقم الجوال">
+                                                </div>
+
+                                                <div class="mb-3">
+                                                    <input type="text" class="form-control" name="street"
+                                                        value="<%=c.address%>" placeholder="العنوان اسم الشارع/ الحي">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <input type="text" class="form-control" name="location"
+                                                        value="<%=c.location%>" placeholder="الموقع المدينة - المحافظة">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <textarea name="details" class="form-control" cols="30" rows="5"
+                                                        placeholder="المزيد من التفاصيل"><%=c.details%></textarea>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <button type="submit" class="btn btn-dark"> حفظ</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <% });%>
+                    </ul>
+                </div>
+            </div>
+            <script src="/dashbord/js/clint.js"></script>

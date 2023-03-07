@@ -24,12 +24,10 @@ const transport = nodemailer.createTransport({
 });
 /*************************** */
 exports.getDash = async (req, res) => {
-    const clients = await Client.find({ store: req.session.store._id });
     const Company = await company.find();
     const Store = await Strore.findById(req.session.store._id)
     console.log(Store)
     res.render('main/dashbord/index', {
-        clients: clients,
         companys: Company,
         wallet: req.session.store.wallet
     })
@@ -41,6 +39,14 @@ exports.getPac = async (req, res) => {
     console.log(orders);
     res.render('main/dashbord/package', {
         orders: orders,
+        wallet: req.session.store.wallet
+    })
+}
+/**************** */
+exports.getClintsPage = async (req, res) => {
+    const clients = await Client.find({ store: req.session.store._id });
+    res.render('main/dashbord/clints', {
+        clients: clients,
         wallet: req.session.store.wallet
     })
 }
@@ -69,7 +75,7 @@ exports.addClient = (req, res) => {
                     })
                     newClient.save()
                         .then(c => {
-                            res.redirect('/')
+                            res.redirect('/clints')
                         })
                 }
             } else {
@@ -84,7 +90,7 @@ exports.addClient = (req, res) => {
                 })
                 newClient.save()
                     .then(c => {
-                        res.redirect('/')
+                        res.redirect('/clints')
                     })
             }
         })
@@ -112,7 +118,7 @@ exports.editClient = (req, res) => {
             return c.save()
         })
         .then(c => {
-            res.redirect('/')
+            res.redirect('/clints')
         })
         .catch(err => {
             console.log(err)

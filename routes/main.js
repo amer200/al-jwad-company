@@ -3,10 +3,11 @@ const routes = express.Router();
 const mainController = require('../controllers/main');
 const storeAuth = require('../middlewares/store-auth');
 
+routes.get('/', storeAuth.isAuth, mainController.getDash);
 /*********pacages */
 routes.get('/pacs', storeAuth.isAuth, mainController.getPac);
 /**clients */
-routes.get('/', storeAuth.isAuth, mainController.getDash);
+routes.get('/clints', storeAuth.isAuth, mainController.getClintsPage);
 routes.post('/add-client', storeAuth.isAuth, mainController.addClient);
 routes.post('/edit-client/:id', storeAuth.isAuth, mainController.editClient);
 routes.get('/remove-client/:id', storeAuth.isAuth, mainController.removeClient);
