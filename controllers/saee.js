@@ -1,11 +1,14 @@
 const SaeeOrder = require('../models/saeeorder');
-
+const Store = require("../models/store");
+const Saee = require("../models/saee");
+const axios = require('axios');
 exports.getCreate = (req, res) => {
     res.render('main/dashbord/saee-create-order.ejs', {
         wallet: req.session.store.wallet
     })
 }
-exports.postCreate = (req, res) => {
+exports.postCreate = async (req, res) => {
+    const saee = await Saee.findOne();
     const p_name = req.body.p_name;
     const p_city = req.body.p_city;
     const p_mobile = req.body.p_mobile;
@@ -18,10 +21,11 @@ exports.postCreate = (req, res) => {
     const c_streetaddress = req.body.c_streetaddress;
     const c_mobile = req.body.c_mobile;
     const data = {
-        p_name: p_name,
-        p_city: p_city,
-        p_mobile: p_mobile,
-        p_streetaddress: p_streetaddress,
+        secret: process.env.SAEE_KEY,
+        name: p_name,
+        city: p_city,
+        mobile: p_mobile,
+        streetaddress: p_streetaddress,
         cashondelivery: cashondelivery,
         weight: weight,
         quantity: quantity,
@@ -33,22 +37,34 @@ exports.postCreate = (req, res) => {
     axios({
         method: 'post',
         url: 'https://www.k-w-h.com/deliveryrequest/new',
-        data: o.details
+        data: data
     })
         .then(response => {
-            console.log(response.data)
             if (response.data.success) {
-                const newOrder = new SaeeOrder({
-                    company: "saee",
-                    store: req.session.store._id,
-                    details: data,
-                    response: response.data
-                })
-                newOrder.save()
-                    .then(o => {
-                        res.status(200).json({
-                            msg: "تم اضافة الشحنة بنجاح"
+                Store.findById(req.session.store._id)
+                    .then(s => {
+                        if (weight > 15) {
+                            s.wallet = (s.wallet - (saee.price + (3 * (weight - 15))));
+                            req.session.store.wallet = s.wallet
+                        } else {
+                            s.wallet = (s.wallet - saee.price);
+                            req.session.store.wallet = s.wallet
+                        }
+                        return s.save();
+                    })
+                    .then(s => {
+                        const newOrder = new SaeeOrder({
+                            company: "saee",
+                            store: req.session.store._id,
+                            details: data,
+                            response: response.data
                         })
+                        newOrder.save()
+                            .then(o => {
+                                res.status(200).json({
+                                    msg: "تم اضافة الشحنة بنجاح"
+                                })
+                            })
                     })
             } else {
                 res.status(400).json({

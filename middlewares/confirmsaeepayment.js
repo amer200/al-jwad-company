@@ -7,11 +7,7 @@ exports.isConfirm = async (req, res, next) => {
         .then(s => {
             if (weight > 15) {
                 if ((s.wallet - (saee.price + (3 * (weight - 15)))) > 0) {
-                    s.wallet = (s.wallet - (saee.price + (3 * (weight - 15))));
-                    s.save()
-                        .then(s => {
-                            next()
-                        })
+                    next()
                 } else {
                     console.log("m1")
                     res.status(200).json({
@@ -20,11 +16,7 @@ exports.isConfirm = async (req, res, next) => {
                 }
             } else {
                 if ((s.wallet - saee.price) > 0) {
-                    s.wallet = s.wallet - saee.price;
-                    s.save()
-                        .then(s => {
-                            next()
-                        })
+                    next()
                 } else {
                     console.log("m")
                     res.status(200).json({
