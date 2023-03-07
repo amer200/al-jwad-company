@@ -1,4 +1,5 @@
 const Strore = require('../models/store');
+const SaeeOrder = require('../models/saeeorder');
 const Pacorder = require('../models/saeeorder');
 const Client = require('../models/client');
 const Order = require('../models/order');
@@ -33,7 +34,16 @@ exports.getDash = async (req, res) => {
         wallet: req.session.store.wallet
     })
 }
-
+exports.getPac = async (req, res) => {
+    let orders = [];
+    const saeeOrders = await SaeeOrder.find({ store: req.session.store._id });
+    orders = [...saeeOrders];
+    console.log(orders);
+    res.render('main/dashbord/package', {
+        orders: orders,
+        wallet: req.session.store.wallet
+    })
+}
 exports.addClient = (req, res) => {
     const name = req.body.name;
     const mobile = req.body.number;

@@ -1,0 +1,19 @@
+<div id="sidebar-wrapper">
+    <ul class="sidebar-nav">
+        <li class="sidebar-brand"> <a href=""> logo </a> </li>
+        <li> <i class="fa-solid fa-sack-dollar"></i><button class="btn btn-success" data-bs-toggle="modal"
+                data-bs-target="#wallet" style="background: none;
+                border: none;">
+                المحفظة(
+                ر.س<%=wallet%>)</button></li>
+        <li> <img src="/imgs/costumer.png" style="width: 25px;
+            height: 25px;
+            margin-right: 15px;"><a href="#">العملاء</a> </li>
+        <li> <i class="fa-solid fa-cube"></i><a href="/pacs">الشحنات</a> </li>
+        <li> <i class="fa-solid fa-truck-fast"></i><a href="/">شركات الشحن</a>
+        </li>
+        <li style="margin-top: 160%;"> <i class="fa-solid fa-right-from-bracket"></i><a href="/logout">تسجيل
+                الخروج</a> </li>
+    </ul>
+</div> <!-- /#sidebar-wrapper -->
+<%- include('../wallet')-%>

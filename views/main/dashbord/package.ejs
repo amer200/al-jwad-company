@@ -1,32 +1,38 @@
-<link rel="stylesheet" href="/dashbord/css/package.css">
-<div class="row d-none" id="package-box">
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">شركة الشحن</th>
-                <th scope="col">اسم العميل</th>
-                <th scope="col"></th>
-            </tr>
-        </thead>
-        <tbody>
-            <% let i=0 %>
-                <%pacorder.forEach(p=>{%>
-                    <tr>
-                        <th scope="row">
-                            <%=i++%>
-                        </th>
-                        <td>
-                            <%=p.company%>
-                        </td>
-                        <td>
-                            <%=p.name %>
-                        </td>
-                        <td><a class="btn btn-primary" target="_blank" href="/saee/saee-print-sticker/<%=p.details.waybill%>">طباعة
-                                استيكر</a></td>
-                    </tr>
-                    <%})%>
-        </tbody>
-    </table>
-</div>
-<script src="/dashbord/js/package.js"></script>
+<%- include('./includes/head') -%>
+    <div id="wrapper" class="toggled">
+        <%- include('./includes/side-bar') -%>
+            <link rel="stylesheet" href="/dashbord/css/package.css">
+            <div class="row" id="package-box" style="width: 100%;
+            float: left;">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">شركة الشحن</th>
+                            <th scope="col">اسم العميل</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% let i=0 %>
+                            <%orders.forEach(p=>{%>
+                                <tr>
+                                    <th scope="row">
+                                        <%=i++%>
+                                    </th>
+                                    <td>
+                                        ساعي
+                                    </td>
+                                    <td>
+                                        <%=p.name %>
+                                    </td>
+                                    <td><a class="btn btn-primary" target="_blank"
+                                            href="/saee/saee-print-sticker/<%=p.response.waybill%>">طباعة
+                                            استيكر</a></td>
+                                </tr>
+                                <%})%>
+                    </tbody>
+                </table>
+            </div>
+            <script src="/dashbord/js/package.js"></script>
+            <%- include('./includes/footer') -%>

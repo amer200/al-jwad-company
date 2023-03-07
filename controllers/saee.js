@@ -76,3 +76,23 @@ exports.postCreate = async (req, res) => {
             console.log(err)
         })
 }
+exports.getSaeeSticker = (req, res) => {
+    const orderId = req.params.id;
+    const waybill = req.params.waybill;
+    axios({
+        method: 'get',
+        url: `https://corporate.k-w-h.com/deliveryrequest/printsticker/${waybill}`,
+        data: {
+            secret: process.env.SAEE_KEY
+        }
+    })
+        .then(response => {
+            const sticker = response.data;
+            res.render('main/dashbord/includes/saee-sticer', {
+                data: sticker
+            })
+        })
+        .catch(err => {
+            console.log(err)
+        })
+}

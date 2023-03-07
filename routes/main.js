@@ -2,6 +2,9 @@ const express = require('express');
 const routes = express.Router();
 const mainController = require('../controllers/main');
 const storeAuth = require('../middlewares/store-auth');
+
+/*********pacages */
+routes.get('/pacs', storeAuth.isAuth, mainController.getPac);
 /**clients */
 routes.get('/', storeAuth.isAuth, mainController.getDash);
 routes.post('/add-client', storeAuth.isAuth, mainController.addClient);
