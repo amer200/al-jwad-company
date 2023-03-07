@@ -3,7 +3,6 @@ const Pacorder = require('../models/pacorder');
 const Store = require('../models/store');
 const aramex = require('aramex-api');
 const axios = require('axios');
-const { response } = require('express');
 exports.changeStatus = async (req, res) => {
     const id = req.params.id;
     Company.findById(id)
@@ -36,6 +35,7 @@ exports.newSaeeOrder = (req, res) => {
     const c_city = req.body.c_city;
     const c_streetaddress = req.body.c_streetaddress;
     const c_mobile = req.body.c_mobile;
+    console.log(req.body.declared_value);
     axios({
         method: 'post',
         url: 'https://www.k-w-h.com/deliveryrequest/new',
@@ -59,6 +59,7 @@ exports.newSaeeOrder = (req, res) => {
             if (response.data.success) {
                 const newPacorder = new Pacorder({
                     company: "saee",
+                    name: c_name,
                     store: req.session.store._id,
                     details: {
                         waybill: response.data.waybill
