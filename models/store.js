@@ -10,7 +10,7 @@ const storeSchema = mongoose.Schema({
     clients: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Client' }],
     orders: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Order' }],
     wallet: Number,
-    code: String
+    code: String,
 })
 
 module.exports = mongoose.model('Store', storeSchema);
