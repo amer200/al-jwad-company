@@ -227,9 +227,9 @@ exports.addFund = (req, res) => {
     telr.order({
         orderId: new Date().valueOf(),
         amount: amount,
-        returnUrl: "http://al-jwad.onrender.com/check-order",
-        declineUrl: "http://al-jwad.onrender.com/check-order",
-        cancelUrl: "http://al-jwad.onrender.com/check-order",
+        returnUrl: "http://83.136.219.95/check-order",
+        declineUrl: "http://83.136.219.95/check-order",
+        cancelUrl: "http://83.136.219.95/check-order",
         description: "add to wallet"
     }, function (err, createRes) {
         console.log(createRes);
