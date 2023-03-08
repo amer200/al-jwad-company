@@ -8,6 +8,7 @@ exports.getCreate = (req, res) => {
     })
 }
 exports.postCreate = async (req, res) => {
+    console.log(req.body);
     const saee = await Saee.findOne();
     const p_name = req.body.p_name;
     const p_city = req.body.p_city;
@@ -35,11 +36,13 @@ exports.postCreate = async (req, res) => {
         c_mobile: c_mobile
     }
     axios({
-        method: 'post',
+        method: 'POST',
+        headers: { 'content-type': 'application/json;charset=utf-8' },
         url: 'http://www.saee.sa/deliveryrequest/new',
         data: data
     })
         .then(response => {
+            console.log(response.data)
             if (response.data.success) {
                 Store.findById(req.session.store._id)
                     .then(s => {
@@ -73,7 +76,7 @@ exports.postCreate = async (req, res) => {
             }
         })
         .catch(err => {
-            console.log(err)
+            console.log(err.response)
         })
 }
 exports.getSaeeSticker = (req, res) => {
