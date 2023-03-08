@@ -36,7 +36,7 @@ exports.postCreate = async (req, res) => {
     }
     axios({
         method: 'post',
-        url: 'https://www.k-w-h.com/deliveryrequest/new',
+        url: 'http://www.saee.sa/deliveryrequest/new',
         data: data
     })
         .then(response => {
@@ -81,7 +81,7 @@ exports.getSaeeSticker = (req, res) => {
     const waybill = req.params.waybill;
     axios({
         method: 'get',
-        url: `https://corporate.k-w-h.com/deliveryrequest/printsticker/${waybill}`,
+        url: `https://corporate.saeex.com/deliveryrequest/printsticker/${waybill}`,
         data: {
             secret: process.env.SAEE_KEY
         }
