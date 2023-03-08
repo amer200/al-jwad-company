@@ -225,9 +225,9 @@ exports.addFund = (req, res) => {
     telr.order({
         orderId: new Date().valueOf(),
         amount: amount,
-        returnUrl: "http://localhost:5000/check-order",
-        declineUrl: "http://localhost:5000/check-order",
-        cancelUrl: "http://localhost:5000/check-order",
+        returnUrl: "https://dashboard.go-tex.net/check-order",
+        declineUrl: "https://dashboard.go-tex.net/check-order",
+        cancelUrl: "https://dashboard.go-tex.net/check-order",
         description: "add to wallet"
     }, function (err, createRes) {
         console.log(createRes);
