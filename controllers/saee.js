@@ -37,8 +37,8 @@ exports.postCreate = async (req, res) => {
     }
     axios({
         method: 'POST',
-        headers: { 'content-type': 'application/json;charset=utf-8' },
-        url: 'http://www.saee.sa/deliveryrequest/new',
+        headers: { 'Content-Type': 'application/json' },
+        url: 'https://corporate.saeex.com/deliveryrequest/new',
         data: data
     })
         .then(response => {
@@ -76,7 +76,7 @@ exports.postCreate = async (req, res) => {
             }
         })
         .catch(err => {
-            console.log(err.response)
+            console.log(err.request)
         })
 }
 exports.getSaeeSticker = (req, res) => {
