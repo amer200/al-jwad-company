@@ -1,6 +1,5 @@
 const Strore = require('../models/store');
 const SaeeOrder = require('../models/saeeorder');
-const Pacorder = require('../models/saeeorder');
 const Client = require('../models/client');
 const Order = require('../models/order');
 const bcrypt = require('bcryptjs');
@@ -8,10 +7,9 @@ const ejs = require('ejs');
 const salt = bcrypt.genSaltSync(10);
 const nodemailer = require('nodemailer');
 const company = require('../models/company');
-const store = require('../models/store');
 const axios = require('axios');
 const telr = require("telr-nodejs")(process.env.TELR_AUTH, process.env.TELR_ID, {
-    isTest: 1,
+    isTest: 0,
     currency: "SAR"
 });
 /* nodemailer config */
@@ -227,9 +225,9 @@ exports.addFund = (req, res) => {
     telr.order({
         orderId: new Date().valueOf(),
         amount: amount,
-        returnUrl: "http://al-jwad.onrender.com/check-order",
-        declineUrl: "http://al-jwad.onrender.com/check-order",
-        cancelUrl: "http://al-jwad.onrender.com/check-order",
+        returnUrl: "http://localhost:5000/check-order",
+        declineUrl: "http://localhost:5000/check-order",
+        cancelUrl: "http://localhost:5000/check-order",
         description: "add to wallet"
     }, function (err, createRes) {
         console.log(createRes);
@@ -275,7 +273,7 @@ exports.checkOrder = (req, res) => {
                             }
                         });
                 } else {
-                    res.redirect('/')
+                    res.send(' لم تنجح عملية الدفع !')
                 }
             })
     } else {
