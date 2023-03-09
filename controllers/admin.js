@@ -1,10 +1,11 @@
 const Strore = require('../models/store');
 const Saee = require('../models/saee');
+const User = require('../models/user');
 const Client = require('../models/client');
 const Order = require('../models/order');
-const bcrypt = require('bcryptjs');
 const ejs = require('ejs');
 const saee = require('../models/saee');
+const bcrypt = require('bcryptjs');
 const nodemailer = require('nodemailer');
 /* nodemailer config */
 const transport = nodemailer.createTransport({
@@ -99,5 +100,32 @@ exports.editSaeePrice = (req, res) => {
         })
         .catch(err => {
             console.log(err)
+        })
+}
+
+exports.getLogin = (req, res) => {
+    res.render("admin/login")
+}
+exports.postLogin = (req, res) => {
+    const password = req.body.password;
+    const email = req.body.email;
+    User.findOne({ email: email })
+        .then(u => {
+            if (u) {
+                if (bcrypt.compareSync(password, u.password)) {
+                    return req.session.user = u;
+                } else {
+                    return false
+                }
+            } else {
+                return false
+            }
+        })
+        .then(resu => {
+            if (resu) {
+                res.redirect('/admin');
+            } else {
+                res.redirect('/admin/login')
+            }
         })
 }

@@ -42,33 +42,47 @@ exports.postCreate = async (req, res) => {
         data: data
     })
         .then(response => {
-            console.log(response.data)
             if (response.data.success) {
-                Store.findById(req.session.store._id)
-                    .then(s => {
-                        if (weight > 15) {
-                            s.wallet = (s.wallet - (saee.price + (3 * (weight - 15))));
-                            req.session.store.wallet = s.wallet
-                        } else {
-                            s.wallet = (s.wallet - saee.price);
-                            req.session.store.wallet = s.wallet
-                        }
-                        return s.save();
+                if (cashondelivery) {
+                    const newOrder = new SaeeOrder({
+                        company: "saee",
+                        store: req.session.store._id,
+                        details: data,
+                        response: response.data
                     })
-                    .then(s => {
-                        const newOrder = new SaeeOrder({
-                            company: "saee",
-                            store: req.session.store._id,
-                            details: data,
-                            response: response.data
-                        })
-                        newOrder.save()
-                            .then(o => {
-                                res.status(200).json({
-                                    msg: "تم اضافة الشحنة بنجاح"
-                                })
+                    newOrder.save()
+                        .then(o => {
+                            res.status(200).json({
+                                msg: "تم اضافة الشحنة بنجاح"
                             })
-                    })
+                        })
+                } else {
+                    Store.findById(req.session.store._id)
+                        .then(s => {
+                            if (weight > 15) {
+                                s.wallet = (s.wallet - (saee.price + (3 * (weight - 15))));
+                                req.session.store.wallet = s.wallet
+                            } else {
+                                s.wallet = (s.wallet - saee.price);
+                                req.session.store.wallet = s.wallet
+                            }
+                            return s.save();
+                        })
+                        .then(s => {
+                            const newOrder = new SaeeOrder({
+                                company: "saee",
+                                store: req.session.store._id,
+                                details: data,
+                                response: response.data
+                            })
+                            newOrder.save()
+                                .then(o => {
+                                    res.status(200).json({
+                                        msg: "تم اضافة الشحنة بنجاح"
+                                    })
+                                })
+                        })
+                }
             } else {
                 res.status(400).json({
                     msg: response.data.error
