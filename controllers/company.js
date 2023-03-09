@@ -107,28 +107,36 @@ exports.aramexApi = async (req, res) => {
         const c_Line1 = req.body.c_streetaddress;
         const c_City = req.body.c_city;
         const c_CountryCode = 'SAU';
-        const clientInfo = new aramex.ClientInfo();
-        // aramex.Aramex.setClientInfo(clientInfo);
+        const clientInfo = new aramex.ClientInfo({
+            UserName: 'aljwadalmomez@gmail.com',
+            Password: 'Aljwadsa99$$!',
+            Version: 'v1.0',
+            AccountNumber: '71483910',
+            // AccountPin: '331421',
+            AccountEntity: 'AMM',
+            // AccountCountryCode: 'JO'
+        });
+        aramex.Aramex.setClientInfo(clientInfo);
 
         aramex.Aramex.setConsignee(new aramex.Consignee(
-            PersonName = sh_PersonName,
-            CompanyName = sh_CompanyName,
-            EmailAddress = sh_EmailAddress,
-            PhoneNumber1 = sh_PhoneNumber1,
-            Line1 = sh_Line1,
-            City = sh_City,
-            CountryCode = sh_CountryCode));
+            PersonName = "amer mostafa",
+            CompanyName = "test",
+            EmailAddress = "amermostaafa@gmail.com",
+            PhoneNumber1 = "+201152306375",
+            Line1 = "مكة",
+            City = "مكة",
+            CountryCode = "SAU"));
 
         aramex.Aramex.setShipper(new aramex.Shipper(
-            PersonName = c_PersonName,
+            PersonName = "khaled",
             CompanyName = null,
             EmailAddress = null,
-            PhoneNumber1 = c_PhoneNumber1,
+            PhoneNumber1 = "+201152306375",
             PhoneNumber1Ext = null,
             CellPhone = '9661123151',
-            Line1 = c_Line1,
+            Line1 = "الرياض",
             CountryCode = 'SAU',
-            City = c_City));
+            City = "الرياض"));
 
         aramex.Aramex.setThirdParty(new aramex.ThirdParty());
 
