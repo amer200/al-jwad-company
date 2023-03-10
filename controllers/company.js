@@ -112,7 +112,7 @@ exports.aramexApi = async (req, res) => {
             Password: 'Aljwadsa99$$!',
             Version: 'v1.0',
             AccountNumber: '71483910',
-            // AccountPin: '331421',
+            AccountPin: '71483910',
             AccountEntity: 'AMM',
             // AccountCountryCode: 'JO'
         });
