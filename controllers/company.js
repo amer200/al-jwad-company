@@ -114,7 +114,7 @@ exports.aramexApi = async (req, res) => {
             AccountNumber: '71483910',
             AccountPin: '71483910',
             AccountEntity: 'AMM',
-            // AccountCountryCode: 'JO'
+            AccountCountryCode: 'SAU'
         });
         aramex.Aramex.setClientInfo(clientInfo);
 

@@ -1,12 +1,12 @@
 {
     "ClientInfo": {
-        "UserName": "test.api@aramex.com",
-        "Password": "Aramex@12345",
+        "UserName": "aljwadalmomez@gmail.com",
+        "Password": "Aljwadsa99$$!",
         "Version": "v1.0",
-        "AccountNumber": "60531487",
-        "AccountPin": "654654",
-        "AccountEntity": "BOM",
-        "AccountCountryCode": "IN",
+        "AccountNumber": "71483910",
+        "AccountPin": "776415",
+        "AccountEntity": "JED",
+        "AccountCountryCode": "SA",
         "Source": 24
     },
      "LabelInfo": {
@@ -21,15 +21,15 @@
             "Shipper": {
                 "Reference1": "",
                 "Reference2": "",
-                "AccountNumber": "60531487",
+                "AccountNumber": "71483910",
                 "PartyAddress": {
                     "Line1": "dwayne streey 123, jhsg",
                     "Line2": "",
                     "Line3": "",
-                    "City": "Mumbai",
+                    "City": "مكة",
                     "StateOrProvinceCode": "",
                     "PostCode": "400093",
-                    "CountryCode": "IN",
+                    "CountryCode": "SA",
                     "Longitude": 0,
                     "Latitude": 0,
                     "BuildingNumber": null,
@@ -126,8 +126,8 @@
                     "Type": ""
                 }
             },
-            "ShippingDateTime": "\/Date(1644325822000+0530)\/",
-            "DueDate": "\/Date(1644325822000+0530)\/",
+            "ShippingDateTime": "\/Date(1678611305000)\/",
+            "DueDate": "\/Date(1678870505000)\/",
             "Comments": "",
             "PickupLocation": "",
             "OperationsInstructions": "",
@@ -147,7 +147,7 @@
                 "PaymentType": "P",
                 "PaymentOptions": "",
                 "CustomsValueAmount": {
-                    "CurrencyCode": "USD",
+                    "CurrencyCode": "SAR",
                     "Value": 200
                 },
                 "CashOnDeliveryAmount": null,
@@ -162,55 +162,13 @@
                         "Quantity": "1",
                         "Weight": null,
                         "CustomsValue": {
-                            "CurrencyCode": "USD",
+                            "CurrencyCode": "SAR",
                             "Value": 10
                         },
                         "Comments": "Ravishing Gold Facial Kit Long Lasting Shining Appearance For All Skin Type 125g",
                         "GoodsDescription": "new Gold Facial Kit Long  Shining Appearance",
                         "Reference": "",
                         "CommodityCode": "98765432"
-                    }
-                ],
-                "AdditionalProperties": [
-                    {
-                        "CategoryName": "CustomsClearance",
-                        "Name": "ShipperTaxIdVATEINNumber",
-                        "Value": "123456789101"
-                    },
-                    {
-                        "CategoryName": "CustomsClearance",
-                        "Name": "ConsigneeTaxIdVATEINNumber",
-                        "Value": "987654321012"
-                    },
-                    {
-                        "CategoryName": "CustomsClearance",
-                        "Name": "TaxPaid",
-                        "Value": "1"
-                    },
-                    {
-                        "CategoryName": "CustomsClearance",
-                        "Name": "InvoiceDate",
-                        "Value": "08/17/2020"
-                    },
-                    {
-                        "CategoryName": "CustomsClearance",
-                        "Name": "InvoiceNumber",
-                        "Value": "Inv123456"
-                    },
-                    {
-                        "CategoryName": "CustomsClearance",
-                        "Name": "TaxAmount",
-                        "Value": "120.52"
-                    },
-                    {
-                        "CategoryName": "CustomsClearance",
-                        "Name": "IOSS",
-                        "Value": "1098494352"
-                    },
-                    {
-                        "CategoryName": "CustomsClearance",
-                        "Name": "ExporterType",
-                        "Value": "UT"
                     }
                 ]
             },
