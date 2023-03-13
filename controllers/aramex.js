@@ -7,7 +7,7 @@ exports.getAramexCreate = (req, res) => {
         wallet: req.session.store.wallet
     })
 }
-exports.postCreate = async (req, res) => {
+exports.postCreates = async (req, res) => {
     // const aramex = await aramex.findOne();
     console.log(req.body);
     const sh_line1 = req.body.sh_line1;
@@ -61,7 +61,7 @@ exports.postCreate = async (req, res) => {
     let result = await aramexApi.Aramex.createShipment([{ PackageType: 'Box', Quantity: quantity, Weight: { Value: weight, Unit: 'Kg' }, Comments: 'Docs', Reference: '' }]);
     console.log(result)
 }
-exports.postCreates = async (req, res) => {
+exports.postCreate = async (req, res) => {
     const Aramex = await aramex.findOne();
     const sh_line1 = req.body.sh_line1;
     const sh_city = req.body.sh_city;
