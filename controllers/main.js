@@ -317,7 +317,7 @@ exports.postForgetPassword = (req, res) => {
                         console.log(err);
                     } else {
                         var mailOptions = {
-                            from: 'support@gotex.com',
+                            from: 'team@go-tex.net',
                             to: email,
                             subject: 'reset your password',
                             html: data
