@@ -12,13 +12,26 @@ const telr = require("telr-nodejs")(process.env.TELR_AUTH, process.env.TELR_ID, 
     isTest: 0,
     currency: "SAR"
 });
+const code = (length) => {
+    let result = '';
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const charactersLength = characters.length;
+    let counter = 0;
+    while (counter < length) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+        counter += 1;
+    }
+    return result;
+}
 /* nodemailer config */
 const transport = nodemailer.createTransport({
-    service: "gmail",
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true,
     auth: {
-        user: process.env.GMAIL_USER,
-        pass: process.env.PASSWORD,
-    },
+        user: 'user@gmail.com',
+        pass: 'pass'
+    }
 });
 /*************************** */
 exports.getDash = async (req, res) => {
@@ -172,6 +185,7 @@ exports.postSignUp = (req, res) => {
                 })
                 newStore.save()
                     .then(resu => {
+
                         res.redirect('/')
                     })
                     .catch(err => {
@@ -286,17 +300,7 @@ exports.getforgetPass = (req, res) => {
 }
 exports.postForgetPassword = (req, res) => {
     const email = req.body.email;
-    const code = (length) => {
-        let result = '';
-        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-        const charactersLength = characters.length;
-        let counter = 0;
-        while (counter < length) {
-            result += characters.charAt(Math.floor(Math.random() * charactersLength));
-            counter += 1;
-        }
-        return result;
-    }
+
     Strore.findOne({ email: email })
         .then(s => {
             if (s) {
