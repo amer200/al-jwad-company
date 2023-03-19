@@ -25,7 +25,7 @@ const code = (length) => {
 }
 /* nodemailer config */
 const transport = nodemailer.createTransport({
-    host: 'smtp.gmail.com',
+    host: 'smtp.hostinger.com',
     port: 465,
     secure: true,
     auth: {
