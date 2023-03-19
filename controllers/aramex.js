@@ -41,11 +41,11 @@ exports.postCreates = async (req, res) => {
     }));
 
     aramexApi.Aramex.setShipper(new aramexApi.Shipper({
-        PersonName : sh_name,
-        PhoneNumber1 : sh_mobile,        
-        Line1 : sh_line1,
-        CountryCode : 'SA',
-        City : sh_city
+        PersonName: sh_name,
+        PhoneNumber1: sh_mobile,
+        Line1: sh_line1,
+        CountryCode: 'SA',
+        City: sh_city
     }));
 
     aramexApi.Aramex.setThirdParty(new aramexApi.ThirdParty());
@@ -73,218 +73,256 @@ exports.postCreate = async (req, res) => {
     const c_mobile = req.body.c_mobile;
     const weight = req.body.weight;
     const quantity = req.body.quantity;
-    var date = new Date();
-    var data = JSON.stringify(
-        {
-            "ClientInfo": {
-                "UserName": process.env.AR_USERNAME,
-                "Password": process.env.AR_PASSWORD,
-                "Version": "v1.0",
-                "AccountNumber": process.env.AR_ACCOUNT,
-                "AccountPin": process.env.AR_PIN,
-                "AccountEntity": "JED",
-                "AccountCountryCode": "SA",
-                "Source": 24
-            },
-            "LabelInfo": {
-                "ReportID": 9729,
-                "ReportType": "URL"
-            },
-            "Shipments": [
-                {
-                    "Reference1": "",
-                    "Reference2": "",
-                    "Reference3": "",
-                    "Shipper": {
-                        "Reference1": "",
-                        "Reference2": "",
-                        "AccountNumber": process.env.AR_ACCOUNT,
-                        "PartyAddress": {
-                            "Line1": sh_line1,
-                            "Line2": "",
-                            "Line3": "",
-                            "City": sh_city,
-                            "StateOrProvinceCode": "",
-                            "CountryCode": "SA",
-                            "Longitude": 0,
-                            "Latitude": 0,
-                            "BuildingNumber": null,
-                            "BuildingName": null,
-                            "Floor": null,
-                            "Apartment": null,
-                            "POBox": null,
-                            "Description": null
-                        },
-                        "Contact": {
-                            "Department": "",
-                            "PersonName": sh_name,
-                            "Title": "",
-                            "PhoneNumber1": sh_mobil,
-                            "PhoneNumber1Ext": "",
-                            "PhoneNumber2": "",
-                            "PhoneNumber2Ext": "",
-                            "FaxNumber": "",
-                            // "CellPhone": "25655666",
-                            // "EmailAddress": "dosan@gmail.com",
-                            "Type": ""
-                        }
-                    },
-                    "Consignee": {
-                        "Reference1": "",
-                        "Reference2": "",
-                        "AccountNumber": "",
-                        "PartyAddress": {
-                            "Line1": c_line1,
-                            "Line2": "",
-                            "Line3": "",
-                            "City": c_city,
-                            "StateOrProvinceCode": "",
-                            "PostCode": "514516",
-                            "CountryCode": "AE",
-                            "Longitude": 0,
-                            "Latitude": 0,
-                            "BuildingNumber": "",
-                            "BuildingName": "",
-                            "Floor": "",
-                            "Apartment": "",
-                            "POBox": null,
-                            "Description": ""
-                        },
-                        "Contact": {
-                            "Department": "",
-                            "PersonName": c_name,
-                            "Title": "",
-                            "PhoneNumber1": c_mobile,
-                            "PhoneNumber1Ext": "",
-                            "PhoneNumber2": "",
-                            "PhoneNumber2Ext": "",
-                            "FaxNumber": "",
-                            "Type": ""
-                        }
-                    },
-
-                    "ShippingDateTime": `\/Date(${Date.now()})\/`,
-                    "DueDate": `\/Date(${date.setDate(date.getDate() + 7)})\/`,
-                    "Comments": "",
-                    "PickupLocation": "",
-                    "OperationsInstructions": "",
-                    "AccountingInstrcutions": "",
-                    "Details": {
-                        "Dimensions": null,
-                        "ActualWeight": {
-                            "Unit": "KG",
-                            "Value": weight
-                        },
-                        "ChargeableWeight": null,
-                        "DescriptionOfGoods": "Books",
-                        "GoodsOriginCountry": "IN",
-                        "NumberOfPieces": quantity,
-                        "ProductGroup": "EXP",
-                        "ProductType": "PPX",
-                        "PaymentType": "c",
-                        "PaymentOptions": "",
-                        "CustomsValueAmount": {
-                            "CurrencyCode": "SAR",
-                            "Value": 200
-                        },
-                        "CashOnDeliveryAmount": "34",
-                        "InsuranceAmount": null,
-                        "CashAdditionalAmount": null,
-                        "CashAdditionalAmountDescription": "",
-                        "CollectAmount": null,
-                        "Services": "",
-                        "Items": [
-                            {
-                                "PackageType": "Box",
-                                "Quantity": "1",
-                                "Weight": null,
-                                "CustomsValue": {
-                                    "CurrencyCode": "SAR",
-                                    "Value": 10
-                                }
-                            }
-                        ]
-                    },
-                    "Attachments": [],
-                    "ForeignHAWB": "",
-                    "TransportType ": 0,
-                    "PickupGUID": "",
-                    "Number": null,
-                    "ScheduledDelivery": null
-                }
-            ],
-            "Transaction": {
+    const axios = require('axios');
+    let data = JSON.stringify({
+        "ClientInfo": {
+            "UserName": process.env.AR_USERNAME,
+            "Password": process.env.AR_PASSWORD,
+            "Version": "v1.0",
+            "AccountNumber": process.env.AR_ACCOUNT,
+            "AccountPin": process.env.AR_PIN,
+            "AccountEntity": "JED",
+            "AccountCountryCode": "SA",
+            "Source": 24
+        },
+        "LabelInfo": {
+            "ReportID": 9729,
+            "ReportType": "URL"
+        },
+        "Shipments": [
+            {
                 "Reference1": "",
                 "Reference2": "",
                 "Reference3": "",
-                "Reference4": "",
-                "Reference5": ""
+                "Shipper": {
+                    "Reference1": "",
+                    "Reference2": "",
+                    "AccountNumber": process.env.AR_ACCOUNT,
+                    "PartyAddress": {
+                        "Line1": "dwayne streey 123, jhsg",
+                        "Line2": "",
+                        "Line3": "",
+                        "City": "Mumbai",
+                        "StateOrProvinceCode": "",
+                        "PostCode": "400093",
+                        "CountryCode": "IN",
+                        "Longitude": 0,
+                        "Latitude": 0,
+                        "BuildingNumber": null,
+                        "BuildingName": null,
+                        "Floor": null,
+                        "Apartment": null,
+                        "POBox": null,
+                        "Description": null
+                    },
+                    "Contact": {
+                        "Department": "",
+                        "PersonName": "Dosan",
+                        "Title": "",
+                        "CompanyName": "jha pvt",
+                        "PhoneNumber1": "25655666",
+                        "PhoneNumber1Ext": "",
+                        "PhoneNumber2": "",
+                        "PhoneNumber2Ext": "",
+                        "FaxNumber": "",
+                        "CellPhone": "25655666",
+                        "EmailAddress": "dosan@gmail.com",
+                        "Type": ""
+                    }
+                },
+                "Consignee": {
+                    "Reference1": "",
+                    "Reference2": "",
+                    "AccountNumber": "",
+                    "PartyAddress": {
+                        "Line1": "1, bhat ji ki badi",
+                        "Line2": "",
+                        "Line3": "",
+                        "City": "Dubai",
+                        "StateOrProvinceCode": "",
+                        "PostCode": "",
+                        "CountryCode": "AE",
+                        "Longitude": 0,
+                        "Latitude": 0,
+                        "BuildingNumber": "",
+                        "BuildingName": "",
+                        "Floor": "",
+                        "Apartment": "",
+                        "POBox": null,
+                        "Description": ""
+                    },
+                    "Contact": {
+                        "Department": "",
+                        "PersonName": "Viki",
+                        "Title": "",
+                        "CompanyName": "hgh pvt ltd",
+                        "PhoneNumber1": "8454097313",
+                        "PhoneNumber1Ext": "",
+                        "PhoneNumber2": "",
+                        "PhoneNumber2Ext": "",
+                        "FaxNumber": "",
+                        "CellPhone": "8454097313",
+                        "EmailAddress": "vi@gmail.com",
+                        "Type": ""
+                    }
+                },
+                "ThirdParty": {
+                    "Reference1": "",
+                    "Reference2": "",
+                    "AccountNumber": "",
+                    "PartyAddress": {
+                        "Line1": "",
+                        "Line2": "",
+                        "Line3": "",
+                        "City": "",
+                        "StateOrProvinceCode": "",
+                        "PostCode": "",
+                        "CountryCode": "",
+                        "Longitude": 0,
+                        "Latitude": 0,
+                        "BuildingNumber": null,
+                        "BuildingName": null,
+                        "Floor": null,
+                        "Apartment": null,
+                        "POBox": null,
+                        "Description": null
+                    },
+                    "Contact": {
+                        "Department": "",
+                        "PersonName": "",
+                        "Title": "",
+                        "CompanyName": "",
+                        "PhoneNumber1": "",
+                        "PhoneNumber1Ext": "",
+                        "PhoneNumber2": "",
+                        "PhoneNumber2Ext": "",
+                        "FaxNumber": "",
+                        "CellPhone": "",
+                        "EmailAddress": "",
+                        "Type": ""
+                    }
+                },
+                "ShippingDateTime": `/Date(${new Date().setDate(0)})/`,
+                "DueDate": `/Date(${new Date().setDate(1)})/`,
+                "Comments": "",
+                "PickupLocation": "",
+                "OperationsInstructions": "",
+                "AccountingInstrcutions": "",
+                "Details": {
+                    "Dimensions": null,
+                    "ActualWeight": {
+                        "Unit": "KG",
+                        "Value": 2
+                    },
+                    "ChargeableWeight": null,
+                    "DescriptionOfGoods": "Books",
+                    "GoodsOriginCountry": "IN",
+                    "NumberOfPieces": 1,
+                    "ProductGroup": "EXP",
+                    "ProductType": "PPX",
+                    "PaymentType": "P",
+                    "PaymentOptions": "",
+                    "CustomsValueAmount": {
+                        "CurrencyCode": "USD",
+                        "Value": 200
+                    },
+                    "CashOnDeliveryAmount": null,
+                    "InsuranceAmount": null,
+                    "CashAdditionalAmount": null,
+                    "CashAdditionalAmountDescription": "",
+                    "CollectAmount": null,
+                    "Services": "",
+                    "Items": [
+                        {
+                            "PackageType": "Box",
+                            "Quantity": "1",
+                            "Weight": null,
+                            "CustomsValue": {
+                                "CurrencyCode": "USD",
+                                "Value": 10
+                            },
+                            "Comments": "Ravishing Gold Facial Kit Long Lasting Shining Appearance For All Skin Type 125g",
+                            "GoodsDescription": "new Gold Facial Kit Long  Shining Appearance",
+                            "Reference": "",
+                            "CommodityCode": "98765432"
+                        }
+                    ],
+                    "AdditionalProperties": [
+                        {
+                            "CategoryName": "CustomsClearance",
+                            "Name": "ShipperTaxIdVATEINNumber",
+                            "Value": "123456789101"
+                        },
+                        {
+                            "CategoryName": "CustomsClearance",
+                            "Name": "ConsigneeTaxIdVATEINNumber",
+                            "Value": "987654321012"
+                        },
+                        {
+                            "CategoryName": "CustomsClearance",
+                            "Name": "TaxPaid",
+                            "Value": "1"
+                        },
+                        {
+                            "CategoryName": "CustomsClearance",
+                            "Name": "InvoiceDate",
+                            "Value": "08/17/2020"
+                        },
+                        {
+                            "CategoryName": "CustomsClearance",
+                            "Name": "InvoiceNumber",
+                            "Value": "Inv123456"
+                        },
+                        {
+                            "CategoryName": "CustomsClearance",
+                            "Name": "TaxAmount",
+                            "Value": "120.52"
+                        },
+                        {
+                            "CategoryName": "CustomsClearance",
+                            "Name": "IOSS",
+                            "Value": "1098494352"
+                        },
+                        {
+                            "CategoryName": "CustomsClearance",
+                            "Name": "ExporterType",
+                            "Value": "UT"
+                        }
+                    ]
+                },
+                "Attachments": [],
+                "ForeignHAWB": "",
+                "TransportType ": 0,
+                "PickupGUID": "",
+                "Number": null,
+                "ScheduledDelivery": null
             }
+        ],
+        "Transaction": {
+            "Reference1": "",
+            "Reference2": "",
+            "Reference3": "",
+            "Reference4": "",
+            "Reference5": ""
         }
-    );
+    });
 
-    var config = {
+    let config = {
         method: 'post',
         maxBodyLength: Infinity,
-        url: 'https://ws.aramex.net/ShippingAPI.V2/Shipping/Service_1_0.svc/json/CreateShipments',
+        url: 'https://ws.dev.aramex.net/shippingapi.v2/shipping/service_1_0.svc/json',
         headers: {
             'Content-Type': 'application/json'
         },
         data: data
     };
 
-    axios(config)
-        .then(response => {
-            // if (response.data.success) {
-            console.log(response.data.Shipments[0])
-            //     if (cashondelivery) {
-            //         const newOrder = new AramexOrder({
-            //             company: "Aramex",
-            //             store: req.session.store._id,
-            //             details: data,
-            //             response: response.data
-            //         })
-            //         newOrder.save()
-            //             .then(o => {
-            //                 console.log(o.response)
-            //                 res.status(200).json({
-            //                     msg: "تم اضافة الشحنة بنجاح"
-            //                 })
-            //             })
-            //     } else {
-            //         Store.findById(req.session.store._id)
-            //             .then(s => {
-            //                 if (weight > 15) {
-            //                     s.wallet = (s.wallet - (Aramex.price + (3 * (weight - 15))));
-            //                     req.session.store.wallet = s.wallet
-            //                 } else {
-            //                     s.wallet = (s.wallet - Aramex.price);
-            //                     req.session.store.wallet = s.wallet
-            //                 }
-            //                 return s.save();
-            //             })
-            //             .then(s => {
-            //                 const newOrder = new AramexOrder({
-            //                     company: "Aramex",
-            //                     store: req.session.store._id,
-            //                     details: data,
-            //                     response: response.data
-            //                 })
-            //                 newOrder.save()
-            //                     .then(o => {
-            //                         res.status(200).json({
-            //                             msg: "تم اضافة الشحنة بنجاح"
-            //                         })
-            //                     })
-            //             })
-            //     }
-            // } else {
-            //     res.status(400).json({
-            //         msg: response.data.error
-            //     })
-            // }
+    axios.request(config)
+        .then((response) => {
+            console.log(JSON.stringify(response.data));
         })
-        .catch(err => {
-            console.log(err)
-        })
+        .catch((error) => {
+            console.log(error);
+        });
+
 }

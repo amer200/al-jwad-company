@@ -1,4 +1,6 @@
 <%- include('./includes/head') -%>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
     <link rel="stylesheet" href="/dashbord/css/signup.css">
     <section class="vh-100" style="background-color: #ddd;">
         <div class="container py-5 h-100">
@@ -33,12 +35,11 @@
                                                         name="stroreName" required />
                                                     <label class="form-label" for="form2Example11">اسم المتجر</label>
                                                 </div>
-                                                <div class="form-outline mb-4"
-                                                    style="width: 45%; display: inline-block; margin: 5px;">
+                                                <div class="form-outline mb-4 number-box">
                                                     <input type="number" id="number"
                                                         class="form-control form-control-lg" min="0" name="number"
-                                                        required />
-                                                    <label class="form-label" for="form2Example12">الجوال</label>
+                                                        required/>
+                                                    <label class="form-label phone-label" for="form2Example12">الجوال</label>
                                                 </div>
                                                 <div class="form-outline mb-4" style="width: 91%; margin: 10px;">
                                                     <input type="email" id="email" class="form-control form-control-lg"
@@ -98,5 +99,13 @@
             </div>
         </div>
     </section>
+    <script>
+        const phoneInputField = document.querySelector("#number");
+        const phoneInput = window.intlTelInput(phoneInputField, {
+            initialCountry: "SA",
+            utilsScript:
+                "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+        });
+    </script>
     <script src="/dashbord/js/signup.js"></script>
     <%- include('./includes/footer') -%>

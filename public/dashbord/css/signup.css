@@ -15,3 +15,43 @@
     background-color: #0D6EFD;
     color: #fff;
 }
+
+.phone-label {
+    position: relative;
+    top: 30px;
+    left: 85%;
+}
+
+.number-box {
+    width: 45%;
+    display: inline-block;
+    margin: 5px;
+    position: relative;
+    top: -35px;
+}
+
+.iti--allow-dropdown .iti__flag-container {
+    right: 0;
+}
+
+.iti__country-list {
+    width: 330px;
+}
+
+.iti__selected-flag {
+    width: 45px;
+}
+
+.iti__country {
+    text-align: right;
+}
+
+@media screen and (max-width: 991px) {
+    .phone-label {
+        position: static;
+    }
+
+    .number-box {
+        top: 0;
+    }
+}
